@@ -1,0 +1,23 @@
+{
+  "name": "abhay-portfolio-server",
+  "version": "1.0.0",
+  "description": "Backend API for Abhay Kumar Portfolio & CMS",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "RUN_STANDALONE=true node server.js",
+    "seed": "node -e \"import('./utils/dataStore.js').then(m => m.initAdminUser())\""
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
+    "helmet": "^8.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.12.1"
+  }
+}
