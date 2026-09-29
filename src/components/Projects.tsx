@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { PROJECTS, Project } from '../data/portfolioData';
 import { ExternalLink, Eye, ArrowUpRight } from 'lucide-react';
 import { ProjectModal } from './ProjectModal';
@@ -9,6 +10,11 @@ export const Projects: React.FC = () => {
 
   const handleImageError = (id: string) => {
     setFailedImages((prev) => ({ ...prev, [id]: true }));
+  };
+
+  const getCleanImage = (img: string) => {
+    if (!img) return '';
+    return img.replace(/^\/src\/assets\/images\//, '/assets/images/');
   };
 
   return (
@@ -30,20 +36,29 @@ export const Projects: React.FC = () => {
         {/* Project Cards Stack */}
         <div className="space-y-12 sm:space-y-16">
           {PROJECTS.map((project, index) => (
-            <article
+            <motion.article
               key={project.id}
-              className="rounded-2xl bg-gradient-to-b from-[#0F1626]/90 to-[#0A0E18]/90 border border-slate-800/90 hover:border-slate-700 transition-all duration-300 overflow-hidden shadow-xl shadow-black/40 group"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-60px' }}
+              whileHover={{
+                y: -6,
+                transition: { type: 'spring', stiffness: 350, damping: 22 },
+              }}
+              className="rounded-2xl bg-gradient-to-b from-[#0F1626]/90 to-[#0A0E18]/90 border border-slate-800/90 hover:border-blue-500/40 hover:shadow-2xl hover:shadow-blue-500/10 transition-colors duration-300 overflow-hidden shadow-xl shadow-black/40 group"
             >
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 items-center">
                 {/* Visual Preview Container */}
                 <div className="lg:col-span-7 relative bg-slate-950 aspect-[16/9] lg:aspect-[16/10] overflow-hidden border-b lg:border-b-0 lg:border-r border-slate-800">
                   {!failedImages[project.id] ? (
-                    <img
-                      src={project.image}
+                    <motion.img
+                      src={getCleanImage(project.image)}
                       alt={`${project.name} e-commerce website showcase`}
                       referrerPolicy="no-referrer"
                       onError={() => handleImageError(project.id)}
-                      className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                      whileHover={{ scale: 1.05 }}
+                      transition={{ duration: 0.45, ease: 'easeOut' }}
+                      className="w-full h-full object-cover object-top will-change-transform"
                     />
                   ) : (
                     <div className="w-full h-full flex flex-col items-center justify-center p-8 bg-slate-900 text-center">
@@ -112,7 +127,7 @@ export const Projects: React.FC = () => {
                   </div>
                 </div>
               </div>
-            </article>
+            </motion.article>
           ))}
         </div>
       </div>

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   ArrowUp,
   Lock,
@@ -10,16 +11,32 @@ import {
   Download,
   Copy,
   Check,
-  ExternalLink,
-  Code2,
-  Sparkles,
-  ShoppingBag,
-  Globe,
-  Zap,
+  ChevronDown,
 } from 'lucide-react';
 
 export const Footer = () => {
   const [copiedEmail, setCopiedEmail] = useState(false);
+  const [isMobileOrTablet, setIsMobileOrTablet] = useState(false);
+  const [openMenus, setOpenMenus] = useState({
+    nav: true,
+    capabilities: true,
+    connect: true,
+  });
+
+  React.useEffect(() => {
+    const handleResize = () => {
+      setIsMobileOrTablet(window.innerWidth < 1024);
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const toggleMenu = (key) => {
+    // Only allow toggle on mobile and tablet size
+    if (window.innerWidth >= 1024) return;
+    setOpenMenus((prev) => ({ ...prev, [key]: !prev[key] }));
+  };
 
   const navLinks = [
     { name: 'Home', path: '/' },
@@ -109,84 +126,147 @@ export const Footer = () => {
             </div>
           </div>
 
-          {/* Column 2: Navigation Links (Col Span 2) */}
-          <div className="lg:col-span-2 space-y-4">
-            <p className="text-xs font-mono uppercase tracking-wider font-semibold text-slate-900 dark:text-slate-200">
-              Navigation
-            </p>
-            <ul className="space-y-2.5 text-xs sm:text-sm font-medium">
-              {navLinks.map((link) => (
-                <li key={link.name}>
-                  <Link
-                    to={link.path}
-                    className="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-white transition-colors block py-0.5"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Column 3: Services (Col Span 3) */}
-          <div className="lg:col-span-3 space-y-4">
-            <p className="text-xs font-mono uppercase tracking-wider font-semibold text-slate-900 dark:text-slate-200">
-              Core Capabilities
-            </p>
-            <ul className="space-y-2.5 text-xs sm:text-sm">
-              {serviceLinks.map((service) => (
-                <li key={service.name}>
-                  <Link
-                    to={service.path}
-                    className="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-white transition-colors block py-0.5 line-clamp-1"
-                  >
-                    {service.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Column 4: Direct Connect & Downloads (Col Span 2) */}
-          <div className="lg:col-span-2 space-y-4">
-            <p className="text-xs font-mono uppercase tracking-wider font-semibold text-slate-900 dark:text-slate-200">
-              Connect &amp; Specs
-            </p>
-            <div className="space-y-3 text-xs">
-              <a
-                href="https://github.com/abhay-kumar-js"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-white transition-colors group"
-              >
-                <GitBranch className="w-3.5 h-3.5 text-blue-500 dark:text-blue-400 group-hover:scale-110 transition-transform" />
-                <span className="font-mono truncate">github.com/abhay-kumar-js</span>
-              </a>
-
-              <a
-                href="tel:+917379289932"
-                className="flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
-              >
-                <Phone className="w-3.5 h-3.5 text-emerald-500" />
-                <span className="font-mono">+91-7379289932</span>
-              </a>
-
-              <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400">
-                <MapPin className="w-3.5 h-3.5 text-blue-500" />
-                <span className="font-mono">India (Remote Global)</span>
-              </div>
-
-              <div className="pt-2">
-                <a
-                  href="/assets/Abhay_Kumar_Resume.pdf"
-                  download="Abhay_Kumar_Resume.pdf"
-                  className="w-full inline-flex items-center justify-center gap-2 px-3.5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-mono font-semibold transition-all shadow-md shadow-blue-600/20"
+          {/* Column 2: Navigation Links (Col Span 2) - Menu with Toggle (Mobile/Tablet only) */}
+          <div className="lg:col-span-2 space-y-3">
+            <button
+              onClick={() => toggleMenu('nav')}
+              className="w-full flex items-center justify-between text-xs font-mono uppercase tracking-wider font-semibold text-slate-900 dark:text-slate-200 group/toggle cursor-pointer lg:cursor-default py-1 select-none border-b border-slate-100 dark:border-slate-800/60 pb-2"
+              aria-expanded={openMenus.nav}
+            >
+              <span className="group-hover/toggle:text-blue-600 dark:group-hover/toggle:text-blue-400 transition-colors">
+                Navigation
+              </span>
+              <ChevronDown
+                className={`w-3.5 h-3.5 transition-transform duration-200 lg:hidden ${
+                  openMenus.nav ? 'rotate-180 text-blue-500' : 'text-slate-400'
+                }`}
+              />
+            </button>
+            <AnimatePresence initial={false}>
+              {(!isMobileOrTablet || openMenus.nav) && (
+                <motion.ul
+                  initial={isMobileOrTablet ? { height: 0, opacity: 0 } : false}
+                  animate={{ height: 'auto', opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.22, ease: 'easeInOut' }}
+                  className="space-y-2.5 text-xs sm:text-sm font-medium overflow-hidden pt-1"
                 >
-                  <Download className="w-3.5 h-3.5" />
-                  <span>Resume (PDF)</span>
-                </a>
-              </div>
-            </div>
+                  {navLinks.map((link) => (
+                    <li key={link.name}>
+                      <Link
+                        to={link.path}
+                        className="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-white transition-colors block py-0.5"
+                      >
+                        {link.name}
+                      </Link>
+                    </li>
+                  ))}
+                </motion.ul>
+              )}
+            </AnimatePresence>
+          </div>
+
+          {/* Column 3: Services (Col Span 3) - Menu with Toggle (Mobile/Tablet only) */}
+          <div className="lg:col-span-3 space-y-3">
+            <button
+              onClick={() => toggleMenu('capabilities')}
+              className="w-full flex items-center justify-between text-xs font-mono uppercase tracking-wider font-semibold text-slate-900 dark:text-slate-200 group/toggle cursor-pointer lg:cursor-default py-1 select-none border-b border-slate-100 dark:border-slate-800/60 pb-2"
+              aria-expanded={openMenus.capabilities}
+            >
+              <span className="group-hover/toggle:text-blue-600 dark:group-hover/toggle:text-blue-400 transition-colors">
+                Core Capabilities
+              </span>
+              <ChevronDown
+                className={`w-3.5 h-3.5 transition-transform duration-200 lg:hidden ${
+                  openMenus.capabilities ? 'rotate-180 text-blue-500' : 'text-slate-400'
+                }`}
+              />
+            </button>
+            <AnimatePresence initial={false}>
+              {(!isMobileOrTablet || openMenus.capabilities) && (
+                <motion.ul
+                  initial={isMobileOrTablet ? { height: 0, opacity: 0 } : false}
+                  animate={{ height: 'auto', opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.22, ease: 'easeInOut' }}
+                  className="space-y-2.5 text-xs sm:text-sm overflow-hidden pt-1"
+                >
+                  {serviceLinks.map((service) => (
+                    <li key={service.name}>
+                      <Link
+                        to={service.path}
+                        className="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-white transition-colors block py-0.5 line-clamp-1"
+                      >
+                        {service.name}
+                      </Link>
+                    </li>
+                  ))}
+                </motion.ul>
+              )}
+            </AnimatePresence>
+          </div>
+
+          {/* Column 4: Direct Connect & Downloads (Col Span 2) - Menu with Toggle (Mobile/Tablet only) */}
+          <div className="lg:col-span-2 space-y-3">
+            <button
+              onClick={() => toggleMenu('connect')}
+              className="w-full flex items-center justify-between text-xs font-mono uppercase tracking-wider font-semibold text-slate-900 dark:text-slate-200 group/toggle cursor-pointer lg:cursor-default py-1 select-none border-b border-slate-100 dark:border-slate-800/60 pb-2"
+              aria-expanded={openMenus.connect}
+            >
+              <span className="group-hover/toggle:text-blue-600 dark:group-hover/toggle:text-blue-400 transition-colors">
+                Connect &amp; Specs
+              </span>
+              <ChevronDown
+                className={`w-3.5 h-3.5 transition-transform duration-200 lg:hidden ${
+                  openMenus.connect ? 'rotate-180 text-blue-500' : 'text-slate-400'
+                }`}
+              />
+            </button>
+            <AnimatePresence initial={false}>
+              {(!isMobileOrTablet || openMenus.connect) && (
+                <motion.div
+                  initial={isMobileOrTablet ? { height: 0, opacity: 0 } : false}
+                  animate={{ height: 'auto', opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.22, ease: 'easeInOut' }}
+                  className="space-y-3 text-xs overflow-hidden pt-1"
+                >
+                  <a
+                    href="https://github.com/abhay-kumar-js"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-white transition-colors group"
+                  >
+                    <GitBranch className="w-3.5 h-3.5 text-blue-500 dark:text-blue-400 group-hover:scale-110 transition-transform" />
+                    <span className="font-mono truncate">github.com/abhay-kumar-js</span>
+                  </a>
+
+                  <a
+                    href="tel:+917379289932"
+                    className="flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
+                  >
+                    <Phone className="w-3.5 h-3.5 text-emerald-500" />
+                    <span className="font-mono">+91-7379289932</span>
+                  </a>
+
+                  <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400">
+                    <MapPin className="w-3.5 h-3.5 text-blue-500" />
+                    <span className="font-mono">India (Remote Global)</span>
+                  </div>
+
+                  <div className="pt-2">
+                    <a
+                      href="/assets/Abhay_Kumar_Resume.pdf"
+                      download="Abhay_Kumar_Resume.pdf"
+                      className="w-full inline-flex items-center justify-center gap-2 px-3.5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-mono font-semibold transition-all shadow-md shadow-blue-600/20"
+                    >
+                      <Download className="w-3.5 h-3.5" />
+                      <span>Resume (PDF)</span>
+                    </a>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </div>
 

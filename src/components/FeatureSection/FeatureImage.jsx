@@ -48,11 +48,11 @@ export const FeatureImage = ({
       >
         <path
           d="M22 2C22 13 31 22 42 22C31 22 22 31 22 42C22 31 13 22 2 22C13 22 22 13 22 2Z"
-          fill="#8B5CF6"
+          fill="#3B82F6"
           fillOpacity="0.85"
         />
-        <circle cx="37" cy="8" r="2" fill="#7C3AED" />
-        <circle cx="7" cy="36" r="1.5" fill="#7C3AED" />
+        <circle cx="37" cy="8" r="2" fill="#2563EB" />
+        <circle cx="7" cy="36" r="1.5" fill="#2563EB" />
       </svg>
 
       {/* Mid-Left Hand-drawn curved doodle accent */}
@@ -67,7 +67,7 @@ export const FeatureImage = ({
       >
         <path
           d="M6 10C14 6 28 8 32 18C35 25 31 34 22 36C15 37 9 32 10 26C11 20 18 17 24 20"
-          stroke="#7C3AED"
+          stroke="#2563EB"
           strokeWidth="2.5"
           strokeLinecap="round"
           strokeLinejoin="round"

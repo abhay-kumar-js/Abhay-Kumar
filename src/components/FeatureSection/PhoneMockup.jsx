@@ -39,7 +39,7 @@ export const PhoneMockup = ({
       >
         <path
           d="M15 125 C 25 35, 95 15, 128 42"
-          stroke="#8B5CF6"
+          stroke="#3B82F6"
           strokeWidth="1.8"
           strokeDasharray="4 4"
           strokeLinecap="round"

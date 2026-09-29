@@ -8,21 +8,132 @@
 :root {
   --fs-bg-page: #FAFAF9;
   --fs-container-bg: #FFFFFF;
-  --fs-text-primary: #111827;
-  --fs-text-secondary: #4B5563;
-  --fs-text-muted: #9CA3AF;
-  --fs-accent-purple: #7C3AED;
-  --fs-accent-purple-hover: #6D28D9;
-  --fs-accent-purple-light: #EDE9FE;
-  --fs-accent-purple-blob: rgba(167, 139, 250, 0.28);
-  --fs-border: #E5E7EB;
+  --fs-card-bg: #FFFFFF;
+  --fs-text-primary: #0F172A;
+  --fs-text-secondary: #475569;
+  --fs-text-muted: #64748B;
+  --fs-accent-theme: #2563EB;
+  --fs-accent-theme-hover: #1D4ED8;
+  --fs-accent-theme-light: #EFF6FF;
+  --fs-accent-theme-blob: rgba(37, 99, 235, 0.16);
+  --fs-border: #E2E8F0;
   --fs-radius-container: 28px;
   --fs-radius-card: 26px;
   --fs-radius-inner: 16px;
   --fs-radius-pill: 9999px;
   --fs-shadow-container: 0 10px 30px -5px rgba(0, 0, 0, 0.05), 0 20px 25px -5px rgba(0, 0, 0, 0.03);
-  --fs-shadow-float: 0 20px 35px -8px rgba(124, 58, 237, 0.12), 0 8px 18px -4px rgba(0, 0, 0, 0.07);
-  --fs-shadow-phone: 0 25px 45px -12px rgba(0, 0, 0, 0.35), 0 10px 22px -6px rgba(124, 58, 237, 0.22);
+  --fs-shadow-float: 0 20px 35px -8px rgba(37, 99, 235, 0.12), 0 8px 18px -4px rgba(0, 0, 0, 0.07);
+  --fs-shadow-phone: 0 25px 45px -12px rgba(0, 0, 0, 0.28), 0 10px 22px -6px rgba(37, 99, 235, 0.2);
+}
+
+/* Theme Awareness: Dark Mode Support */
+:where(.dark, .dark *) {
+  --fs-bg-page: #080B11;
+  --fs-container-bg: #0D1424;
+  --fs-card-bg: #111A2E;
+  --fs-text-primary: #F8FAFC;
+  --fs-text-secondary: #CBD5E1;
+  --fs-text-muted: #94A3B8;
+  --fs-accent-theme: #3B82F6;
+  --fs-accent-theme-hover: #60A5FA;
+  --fs-accent-theme-light: rgba(37, 99, 235, 0.2);
+  --fs-accent-theme-blob: rgba(59, 130, 246, 0.22);
+  --fs-border: #1E293B;
+  --fs-shadow-container: 0 10px 30px -5px rgba(0, 0, 0, 0.6), 0 20px 25px -5px rgba(0, 0, 0, 0.4);
+  --fs-shadow-float: 0 20px 35px -8px rgba(0, 0, 0, 0.7), 0 8px 18px -4px rgba(37, 99, 235, 0.2);
+}
+
+:where(.dark) .floating-task-card {
+  background: var(--fs-card-bg);
+  border-color: #1E293B;
+  box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.6), 0 0 0 1px #1E293B;
+}
+
+:where(.dark) .task-card-header {
+  border-bottom-color: #1E293B;
+}
+
+:where(.dark) .task-name {
+  color: #F8FAFC;
+}
+
+:where(.dark) .task-state-label {
+  color: #94A3B8;
+}
+
+:where(.dark) .task-state-label.done {
+  color: #34D399;
+}
+
+:where(.dark) .task-status-dot.pending {
+  background-color: #1E293B;
+  border-color: #334155;
+}
+
+:where(.dark) .feature-cta-btn {
+  background-color: #2563EB;
+  color: #FFFFFF;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+}
+
+:where(.dark) .feature-cta-btn:hover {
+  background-color: #3B82F6;
+  box-shadow: 0 8px 22px rgba(59, 130, 246, 0.45);
+}
+
+:where(.dark) .phone-device-frame {
+  background: #020617;
+  border: 1px solid #1E293B;
+}
+
+:where(.dark) .phone-inner-screen {
+  background: #090D16;
+}
+
+:where(.dark) .phone-screen-content {
+  background: #090D16;
+  color: #F8FAFC;
+}
+
+:where(.dark) .screen-project-card {
+  background: #0F172A;
+  border-color: #1E293B;
+}
+
+:where(.dark) .screen-title {
+  color: #F8FAFC;
+}
+
+:where(.dark) .screen-sub,
+:where(.dark) .screen-due-tag,
+:where(.dark) .screen-section-label {
+  color: #94A3B8;
+}
+
+:where(.dark) .screen-stat-pct {
+  color: #60A5FA;
+}
+
+:where(.dark) .screen-progress-bar {
+  background: #1E293B;
+}
+
+:where(.dark) .screen-progress-fill {
+  background: #3B82F6;
+}
+
+:where(.dark) .screen-task-item {
+  background: #0F172A;
+  border-color: #1E293B;
+  color: #E2E8F0;
+}
+
+:where(.dark) .screen-task-check {
+  color: #34D399;
+}
+
+:where(.dark) .screen-task-dot {
+  background: #3B82F6;
 }
 
 /* Outer Section Wrapper */
@@ -120,7 +231,7 @@
   position: absolute;
   top: -16px;
   right: -12px;
-  color: var(--fs-accent-purple);
+  color: var(--fs-accent-theme);
   z-index: 3;
   pointer-events: none;
   animation: pulseSparkle 4s ease-in-out infinite alternate;
@@ -130,7 +241,7 @@
   position: absolute;
   top: 36%;
   left: -22px;
-  color: var(--fs-accent-purple);
+  color: var(--fs-accent-theme);
   z-index: 3;
   pointer-events: none;
 }
@@ -151,11 +262,11 @@
   position: absolute;
   bottom: -22px;
   left: -18px;
-  background: #FFFFFF;
+  background: var(--fs-card-bg);
   border-radius: var(--fs-radius-inner);
   padding: 1.15rem 1.25rem;
   box-shadow: var(--fs-shadow-float);
-  border: 1px solid rgba(229, 231, 235, 0.95);
+  border: 1px solid var(--fs-border);
   width: 245px;
   z-index: 10;
   backdrop-filter: blur(8px);
@@ -178,7 +289,7 @@
   justify-content: space-between;
   margin-bottom: 0.85rem;
   padding-bottom: 0.6rem;
-  border-bottom: 1px solid #F3F4F6;
+  border-bottom: 1px solid var(--fs-border);
 }
 
 .task-card-title {
@@ -192,8 +303,8 @@
 .task-card-pill {
   font-size: 0.68rem;
   font-weight: 600;
-  color: var(--fs-accent-purple);
-  background: var(--fs-accent-purple-light);
+  color: var(--fs-accent-theme);
+  background: var(--fs-accent-theme-light);
   padding: 2px 7px;
   border-radius: var(--fs-radius-pill);
 }
@@ -238,8 +349,8 @@
 }
 
 .task-status-dot.pending {
-  background-color: #F3F4F6;
-  border: 1.5px solid #D1D5DB;
+  background-color: #F1F5F9;
+  border: 1.5px solid #CBD5E1;
 }
 
 .task-name {
@@ -268,14 +379,14 @@
   max-width: 380px;
 }
 
-/* Eyebrow label: purple/blue accent, uppercase */
+/* Eyebrow label: theme blue accent, uppercase */
 .feature-eyebrow {
   display: inline-block;
   font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--fs-accent-purple);
+  color: var(--fs-accent-theme);
   margin-bottom: 0.75rem;
 }
 
@@ -313,7 +424,7 @@
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  background-color: var(--fs-accent-purple);
+  background-color: var(--fs-accent-theme);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -330,12 +441,12 @@
   line-height: 1.35;
 }
 
-/* Black Pill-shaped CTA Button */
+/* Theme Pill-shaped CTA Button (No black, no purple) */
 .feature-cta-btn {
   display: inline-flex;
   align-items: center;
   gap: 0.65rem;
-  background-color: #000000;
+  background-color: var(--fs-accent-theme);
   color: #FFFFFF;
   padding: 0.85rem 1.95rem;
   border-radius: var(--fs-radius-pill);
@@ -345,13 +456,13 @@
   border: none;
   cursor: pointer;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.28);
 }
 
 .feature-cta-btn:hover {
-  background-color: #1F2937;
+  background-color: var(--fs-accent-theme-hover);
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.22);
+  box-shadow: 0 8px 22px rgba(37, 99, 235, 0.38);
 }
 
 .cta-arrow {
@@ -377,12 +488,12 @@
   justify-content: center;
 }
 
-/* Soft Purple Abstract Blob behind the phone */
+/* Soft Theme Abstract Blob behind the phone */
 .phone-purple-blob {
   position: absolute;
   width: 270px;
   height: 270px;
-  background: radial-gradient(circle, var(--fs-accent-purple-blob) 0%, rgba(237, 233, 254, 0.45) 55%, transparent 75%);
+  background: radial-gradient(circle, var(--fs-accent-theme-blob) 0%, rgba(37, 99, 235, 0.06) 55%, transparent 75%);
   border-radius: 50%;
   filter: blur(22px);
   z-index: 0;
@@ -409,7 +520,7 @@
   position: absolute;
   top: -18px;
   right: 10px;
-  color: var(--fs-accent-purple);
+  color: var(--fs-accent-theme);
   opacity: 0.95;
   z-index: 2;
   animation: floatPlane 3.2s ease-in-out infinite alternate;
@@ -430,7 +541,8 @@
   z-index: 2;
   width: 195px;
   border-radius: 38px;
-  background: #000000;
+  background: #0F172A;
+  border: 1px solid rgba(226, 232, 240, 0.8);
   padding: 8px;
   box-shadow: var(--fs-shadow-phone);
   transform: rotate(4.5deg);
@@ -470,7 +582,7 @@
 
 /* Screen bezel & inner content */
 .phone-inner-screen {
-  background: #FFFFFF;
+  background: #F8FAFC;
   border-radius: 30px;
   overflow: hidden;
   position: relative;
@@ -499,9 +611,9 @@
 /* Project Management Dashboard inside Phone */
 .phone-screen-content {
   padding: 2.2rem 0.85rem 1rem 0.85rem;
-  background: #FAFAFA;
+  background: #F8FAFC;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  color: #111827;
+  color: #0F172A;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
@@ -516,8 +628,8 @@
 .screen-badge {
   font-size: 0.62rem;
   font-weight: 700;
-  color: var(--fs-accent-purple);
-  background: var(--fs-accent-purple-light);
+  color: var(--fs-accent-theme);
+  background: var(--fs-accent-theme-light);
   padding: 2px 6px;
   border-radius: 6px;
   text-transform: uppercase;
@@ -527,12 +639,12 @@
 .screen-time {
   font-size: 0.65rem;
   font-weight: 700;
-  color: #6B7280;
+  color: #64748B;
 }
 
 .screen-project-card {
   background: #FFFFFF;
-  border: 1px solid #E5E7EB;
+  border: 1px solid #E2E8F0;
   border-radius: 12px;
   padding: 0.75rem;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
@@ -542,7 +654,7 @@
   font-size: 0.58rem;
   font-weight: 600;
   text-transform: uppercase;
-  color: #9CA3AF;
+  color: #64748B;
   letter-spacing: 0.05em;
 }
 
@@ -550,7 +662,7 @@
   font-size: 0.85rem;
   font-weight: 800;
   margin: 0.2rem 0 0.5rem 0;
-  color: #111827;
+  color: #0F172A;
 }
 
 .screen-due-row {
@@ -562,27 +674,27 @@
 
 .screen-due-tag {
   font-size: 0.62rem;
-  color: #4B5563;
+  color: #475569;
   font-weight: 500;
 }
 
 .screen-stat-pct {
   font-size: 0.68rem;
   font-weight: 700;
-  color: var(--fs-accent-purple);
+  color: var(--fs-accent-theme);
 }
 
 .screen-progress-bar {
   width: 100%;
   height: 5px;
-  background: #E5E7EB;
+  background: #E2E8F0;
   border-radius: 4px;
   overflow: hidden;
 }
 
 .screen-progress-fill {
   height: 100%;
-  background: var(--fs-accent-purple);
+  background: var(--fs-accent-theme);
   border-radius: 4px;
 }
 
@@ -662,7 +774,7 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--fs-accent-purple);
+  background: var(--fs-accent-theme);
 }
 
 /* ==========================================================================

@@ -4,6 +4,54 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Abhay Kumar | Web Developer | MERN Stack, Shopify & WordPress</title>
+
+    <script>
+      /* Ensure window.fetch is writable with getter & setter to prevent
+         "TypeError: Cannot set property fetch of #<Window> which has only a getter" */
+      (function() {
+        try {
+          var originalFetch = window.fetch ? window.fetch.bind(window) : null;
+          var currentFetch = originalFetch;
+
+          function defineFetchAccessor(target) {
+            if (!target) return false;
+            try {
+              Object.defineProperty(target, 'fetch', {
+                get: function() {
+                  return currentFetch;
+                },
+                set: function(fn) {
+                  currentFetch = fn;
+                },
+                configurable: true,
+                enumerable: true,
+              });
+              return true;
+            } catch (e) {
+              return false;
+            }
+          }
+
+          defineFetchAccessor(window);
+          if (typeof Window !== 'undefined' && Window.prototype) {
+            defineFetchAccessor(Window.prototype);
+          }
+        } catch (e) {}
+
+        // Global safeguard for unhandled getter assignment errors
+        window.addEventListener(
+          'error',
+          function(e) {
+            if (e && e.message && e.message.includes('fetch of #<Window>')) {
+              e.preventDefault();
+              if (e.stopImmediatePropagation) e.stopImmediatePropagation();
+              return true;
+            }
+          },
+          true
+        );
+      })();
+    </script>
     <meta name="description" content="Abhay Kumar is a Web Developer with 3+ years of experience in MERN Stack, Shopify, WordPress, SEO, and modern website development." />
     <meta name="author" content="Abhay Kumar" />
     <meta name="keywords" content="Abhay Kumar, Web Developer, MERN Stack Developer, Shopify Developer, WordPress Developer, SEO, India" />
