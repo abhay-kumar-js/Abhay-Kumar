@@ -10,9 +10,7 @@ import {
   Layers,
   ShoppingBag,
   ShieldCheck,
-  ChevronRight,
 } from 'lucide-react';
-import { Link } from 'react-router-dom';
 
 export const ProjectDetailSection = ({ projects = [], activeSlug = null, onSelectProject = null }) => {
   const [internalActiveIndex, setInternalActiveIndex] = useState(0);
@@ -216,14 +214,6 @@ export const ProjectDetailSection = ({ projects = [], activeSlug = null, onSelec
                   <ExternalLink className="w-4 h-4" />
                 </a>
               )}
-
-              <Link
-                to={`/projects/${currentProject.slug || currentProject.id}`}
-                className="inline-flex items-center gap-2 px-4 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-900 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 text-xs font-mono font-semibold transition-colors"
-              >
-                <span>Full Case Study</span>
-                <ChevronRight className="w-3.5 h-3.5" />
-              </Link>
             </div>
           </div>
         </motion.div>

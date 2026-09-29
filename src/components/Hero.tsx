@@ -120,7 +120,7 @@ export const Hero: React.FC<HeroProps> = ({ onViewWork, onContact }) => {
                 <div className="relative aspect-square sm:aspect-[4/3] lg:aspect-square bg-slate-950 overflow-hidden group">
                   {!imageError ? (
                     <img
-                      src="/src/assets/images/hero_developer_visual_1790582186038.jpg"
+                      src="/assets/images/hero_developer_visual_1790582186038.jpg"
                       alt="Abhay Kumar Modern Developer Workstation"
                       referrerPolicy="no-referrer"
                       onError={() => setImageError(true)}

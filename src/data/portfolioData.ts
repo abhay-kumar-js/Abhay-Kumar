@@ -159,7 +159,7 @@ export const PROJECTS: Project[] = [
     description:
       'High-conversion luxury oriental perfume e-commerce store with tailored fragrance collections, scent profiles, mobile-first checkout, and custom UI/UX design.',
     tags: ['Shopify', 'Liquid', 'Custom UI/UX', 'Speed Optimization', 'SEO'],
-    image: '/src/assets/images/project_arabianaroma_1790667348374.jpg',
+    image: '/assets/images/project_arabianaroma_1790667348374.jpg',
     highlights: [
       'Bespoke product showcase with refined luxury aesthetic and scent profiles',
       'Fluid navigation and streamlined checkout conversion flow with 30% discount banners',
@@ -174,7 +174,7 @@ export const PROJECTS: Project[] = [
     description:
       'High-converting Shopify e-commerce website for handcrafted ethnic juttis and seasonal footwear with custom collection filters, fast mobile cart drawer, and seamless checkout.',
     tags: ['Shopify', 'E-Commerce', 'Custom Theme', 'Conversion Rate Optimization', 'Mobile UX'],
-    image: '/src/assets/images/project_fusionwalks_1790667305126.jpg',
+    image: '/assets/images/project_fusionwalks_1790667305126.jpg',
     highlights: [
       'Handcrafted jutti collection layouts with high-resolution imagery and size guides',
       'Instant add-to-cart drawer with cross-sell recommendations and promo badges',
@@ -189,7 +189,7 @@ export const PROJECTS: Project[] = [
     description:
       'Boutique luxury perfume e-commerce store featuring a signature dark-gold aesthetic, olfactory note pyramid breakdowns, automated cart drawer, and high performance.',
     tags: ['Shopify', 'Luxury Branding', 'Custom Sections', 'Core Web Vitals', 'Conversion Focus'],
-    image: '/src/assets/images/project_fragobar_1790667321204.jpg',
+    image: '/assets/images/project_fragobar_1790667321204.jpg',
     highlights: [
       'Signature fragrance note pyramid and scent longevity guides',
       'Dark luxury styling with gold accents and responsive typography',
@@ -204,7 +204,7 @@ export const PROJECTS: Project[] = [
     description:
       'Sophisticated e-commerce store for designer women handbags, clutches, and leather accessories with minimalist editorial styling, lookbooks, and high conversion rate.',
     tags: ['Shopify', 'Fashion & Apparel', 'Liquid', 'Multi-Currency', 'Instagram Shop'],
-    image: '/src/assets/images/project_routica_1790667336453.jpg',
+    image: '/assets/images/project_routica_1790667336453.jpg',
     highlights: [
       'Editorial lookbook design with interactive product hotspots and categories',
       'Filtering for handbags, clutches, sling bags, and shoulder bags',
@@ -219,7 +219,7 @@ export const PROJECTS: Project[] = [
     description:
       'A premium digital presence designed for a modern jewelry-focused brand, combining visual presentation with an elegant user experience.',
     tags: ['Shopify', 'Jewelry E-Commerce', 'Luxury Web Design', 'Search Optimization'],
-    image: '/src/assets/images/project_celestia_carat_1790582211499.jpg',
+    image: '/assets/images/project_celestia_carat_1790582211499.jpg',
     highlights: [
       'Elevated visual storytelling for fine diamonds and jewelry',
       'High-resolution product zoom and detailed specifications',
@@ -234,7 +234,7 @@ export const PROJECTS: Project[] = [
     description:
       'A modern online shopping experience built on React.js and Node.js REST APIs with responsive design, instant client-side transitions, and smooth customer checkout journey.',
     tags: ['MERN', 'React.js', 'Node.js', 'Express', 'MongoDB', 'REST APIs'],
-    image: '/src/assets/images/project_the_coed_1790582223025.jpg',
+    image: '/assets/images/project_the_coed_1790582223025.jpg',
     highlights: [
       'Clean streetwear and lifestyle apparel lookbook showcase',
       'High-speed page load speeds and intuitive filter categorization',
@@ -249,7 +249,7 @@ export const PROJECTS: Project[] = [
     description:
       'Comprehensive corporate web platform and digital service showcase built for Real Victory Group with responsive layout, custom Elementor modules, and seamless cross-platform user experience.',
     tags: ['WordPress', 'Elementor Pro', 'React.js', 'Custom Theme', 'Responsive UI'],
-    image: '/src/assets/images/project_realvictory_mockup_1790672832887.jpg',
+    image: '/assets/images/project_realvictory_mockup_1790672832887.jpg',
     highlights: [
       'Engineered responsive, user-friendly, and visually engaging corporate web layouts',
       'Custom WordPress architecture with Elementor Pro integration and fast rendering',
@@ -264,7 +264,7 @@ export const PROJECTS: Project[] = [
     description:
       'Full-featured custom WordPress and WooCommerce e-commerce website with tailored theme architecture, product catalog, payment gateway integration, and Core Web Vitals optimization.',
     tags: ['WordPress', 'WooCommerce', 'Elementor', 'PHP', 'SEO & Speed'],
-    image: '/src/assets/images/project_wp_woocommerce_mockup_1790672849871.jpg',
+    image: '/assets/images/project_wp_woocommerce_mockup_1790672849871.jpg',
     highlights: [
       'Custom WooCommerce product archives and single product templating',
       'Integrated payment gateways, shipping zones, and automated receipt emails',

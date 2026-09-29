@@ -21,6 +21,8 @@ import ServiceCard from '../components/ServiceCard.jsx';
 import TestimonialCarousel from '../components/TestimonialCarousel.jsx';
 import GitHubActivitySection from '../components/GitHubActivitySection.jsx';
 import TechStackSection from '../components/TechStackSection.jsx';
+import FAQSection from '../components/FAQSection.jsx';
+import FeatureSection from '../components/FeatureSection/FeatureSection.jsx';
 import Loader from '../components/Loader.jsx';
 
 export const Home = () => {
@@ -199,27 +201,27 @@ export const Home = () => {
                   className="absolute -inset-1.5 rounded-2xl bg-gradient-to-tr from-blue-600/30 via-cyan-500/20 to-purple-600/20 blur-xl opacity-75"
                 />
 
-                <div className="relative rounded-2xl bg-[#0D1322] border border-slate-700/60 overflow-hidden shadow-2xl shadow-black/80">
-                  <div className="px-4 py-3 bg-[#090D17] border-b border-slate-800 flex items-center justify-between text-xs text-slate-400">
+                <div className="relative rounded-2xl bg-white dark:bg-[#0D1322] border border-slate-200 dark:border-slate-700/60 overflow-hidden shadow-xl shadow-slate-900/10 dark:shadow-2xl dark:shadow-black/80 transition-colors duration-200">
+                  <div className="px-4 py-3 bg-slate-100/90 dark:bg-[#090D17] border-b border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs text-slate-600 dark:text-slate-400">
                     <div className="flex items-center gap-1.5">
                       <span className="w-2.5 h-2.5 rounded-full bg-rose-500/80" />
                       <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
                       <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
                     </div>
-                    <div className="flex items-center gap-1.5 font-mono text-[11px] text-slate-300">
-                      <Terminal className="w-3.5 h-3.5 text-blue-400" />
+                    <div className="flex items-center gap-1.5 font-mono text-[11px] text-slate-700 dark:text-slate-300">
+                      <Terminal className="w-3.5 h-3.5 text-blue-500 dark:text-blue-400" />
                       <span>abhay-developer.ts</span>
                     </div>
-                    <div className="inline-flex items-center gap-1 text-[10px] font-mono text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-500/30">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                    <div className="inline-flex items-center gap-1 text-[10px] font-mono text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-200 dark:border-emerald-500/30">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                       <span>Online</span>
                     </div>
                   </div>
 
-                  <div className="relative aspect-[3/4] sm:aspect-[4/5] bg-slate-950 overflow-hidden group">
+                  <div className="relative aspect-[3/4] sm:aspect-[4/5] bg-slate-100 dark:bg-slate-950 overflow-hidden group">
                     {!imageError ? (
                       <motion.img
-                        src="/src/assets/images/abhay-hero-bg-7379.png"
+                        src="/assets/images/abhay-hero-bg-7379.png"
                         alt="Abhay Kumar - Professional Web Developer"
                         referrerPolicy="no-referrer"
                         onError={() => setImageError(true)}
@@ -235,41 +237,41 @@ export const Home = () => {
                         className="w-full h-full object-cover object-top filter brightness-105 contrast-105"
                       />
                     ) : (
-                      <div className="w-full h-full flex flex-col items-center justify-center p-8 bg-slate-900 text-center">
-                        <Code2 className="w-16 h-16 text-blue-400 mb-3 stroke-1" />
-                        <h3 className="font-display font-bold text-white text-xl">Abhay Kumar</h3>
-                        <p className="text-xs text-slate-400 font-mono mt-1">Web Developer &amp; MERN Engineer</p>
+                      <div className="w-full h-full flex flex-col items-center justify-center p-8 bg-slate-100 dark:bg-slate-900 text-center">
+                        <Code2 className="w-16 h-16 text-blue-500 dark:text-blue-400 mb-3 stroke-1" />
+                        <h3 className="font-display font-bold text-slate-900 dark:text-white text-xl">Abhay Kumar</h3>
+                        <p className="text-xs text-slate-600 dark:text-slate-400 font-mono mt-1">Web Developer &amp; MERN Engineer</p>
                       </div>
                     )}
 
                     <motion.div
                       animate={{ y: [0, 4, 0] }}
                       transition={{ duration: 4.8, repeat: Infinity, ease: 'easeInOut' }}
-                      className="absolute top-4 right-4 px-3 py-1.5 rounded-xl bg-slate-900/90 backdrop-blur-md border border-white/10 shadow-lg flex items-center gap-2"
+                      className="absolute top-4 right-4 px-3 py-1.5 rounded-xl bg-white/95 dark:bg-slate-900/90 backdrop-blur-md border border-slate-200 dark:border-white/10 shadow-lg flex items-center gap-2"
                     >
-                      <span className="w-2 h-2 rounded-full bg-blue-400" />
-                      <span className="text-[11px] font-bold text-blue-200 font-mono">3+ Yrs Exp</span>
+                      <span className="w-2 h-2 rounded-full bg-blue-500" />
+                      <span className="text-[11px] font-bold text-blue-600 dark:text-blue-200 font-mono">3+ Yrs Exp</span>
                     </motion.div>
 
                     <motion.div
                       animate={{ y: [0, -4, 0] }}
                       transition={{ duration: 5.4, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-                      className="absolute inset-x-3 bottom-3 p-3.5 rounded-xl bg-[#090D17]/90 backdrop-blur-md border border-white/10 shadow-lg text-left"
+                      className="absolute inset-x-3 bottom-3 p-3.5 rounded-xl bg-white/95 dark:bg-[#090D17]/90 backdrop-blur-md border border-slate-200 dark:border-white/10 shadow-lg text-left"
                     >
                       <div className="flex items-center justify-between text-xs mb-2">
                         <div className="flex items-center gap-2">
-                          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                          <span className="font-mono text-slate-200 font-semibold">Specialization</span>
+                          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                          <span className="font-mono text-slate-800 dark:text-slate-200 font-semibold">Specialization</span>
                         </div>
-                        <span className="font-mono text-[11px] text-cyan-300 font-bold">MERN &bull; Shopify</span>
+                        <span className="font-mono text-[11px] text-cyan-600 dark:text-cyan-300 font-bold">MERN &bull; Shopify</span>
                       </div>
-                      <div className="text-xs text-slate-300 font-mono space-y-1">
-                        <p className="text-slate-400">
-                          const <span className="text-blue-300">stack</span> = [<br />
-                          &nbsp;&nbsp;<span className="text-emerald-300">"Shopify"</span>,{' '}
-                          <span className="text-emerald-300">"React"</span>,{' '}
-                          <span className="text-emerald-300">"Node.js"</span>,{' '}
-                          <span className="text-emerald-300">"WordPress"</span>
+                      <div className="text-xs text-slate-700 dark:text-slate-300 font-mono space-y-1">
+                        <p className="text-slate-500 dark:text-slate-400">
+                          const <span className="text-blue-600 dark:text-blue-300">stack</span> = [<br />
+                          &nbsp;&nbsp;<span className="text-emerald-600 dark:text-emerald-300">"Shopify"</span>,{' '}
+                          <span className="text-emerald-600 dark:text-emerald-300">"React"</span>,{' '}
+                          <span className="text-emerald-600 dark:text-emerald-300">"Node.js"</span>,{' '}
+                          <span className="text-emerald-600 dark:text-emerald-300">"WordPress"</span>
                           <br />
                           ];
                         </p>
@@ -277,10 +279,10 @@ export const Home = () => {
                     </motion.div>
                   </div>
 
-                  <div className="p-3 bg-[#0A0F1D] border-t border-slate-800/80 flex items-center justify-between text-[11px] font-mono text-slate-400">
-                    <span className="text-slate-300">Location: India</span>
-                    <span className="text-slate-500">|</span>
-                    <span className="text-emerald-400">High-Conversion E-Commerce</span>
+                  <div className="p-3 bg-slate-50 dark:bg-[#0A0F1D] border-t border-slate-200 dark:border-slate-800/80 flex items-center justify-between text-[11px] font-mono text-slate-600 dark:text-slate-400">
+                    <span className="text-slate-700 dark:text-slate-300">Location: India</span>
+                    <span className="text-slate-300 dark:text-slate-500">|</span>
+                    <span className="text-emerald-600 dark:text-emerald-400 font-medium">High-Conversion E-Commerce</span>
                   </div>
                 </div>
               </motion.div>
@@ -397,6 +399,14 @@ export const Home = () => {
       {/* GITHUB CONTRIBUTION GRAPH & ONGOING ACTIVITY SECTION */}
       <section className="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-24">
         <GitHubActivitySection />
+      </section>
+
+      {/* MODERN SAAS FEATURE SHOWCASE SECTION */}
+      <FeatureSection />
+
+      {/* FREQUENTLY ASKED QUESTIONS SECTION */}
+      <section className="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-24">
+        <FAQSection />
       </section>
 
       {/* CALL TO ACTION SECTION */}

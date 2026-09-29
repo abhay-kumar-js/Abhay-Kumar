@@ -1,0 +1,806 @@
+/**
+ * FeatureSection.css
+ * Dedicated CSS styling for the SaaS Feature Section.
+ * Implements design variables, 2-column desktop grid, responsive behaviors,
+ * floating task card, hand-drawn purple accents, and realistic tilted smartphone mockup.
+ */
+
+:root {
+  --fs-bg-page: #FAFAF9;
+  --fs-container-bg: #FFFFFF;
+  --fs-text-primary: #111827;
+  --fs-text-secondary: #4B5563;
+  --fs-text-muted: #9CA3AF;
+  --fs-accent-purple: #7C3AED;
+  --fs-accent-purple-hover: #6D28D9;
+  --fs-accent-purple-light: #EDE9FE;
+  --fs-accent-purple-blob: rgba(167, 139, 250, 0.28);
+  --fs-border: #E5E7EB;
+  --fs-radius-container: 28px;
+  --fs-radius-card: 26px;
+  --fs-radius-inner: 16px;
+  --fs-radius-pill: 9999px;
+  --fs-shadow-container: 0 10px 30px -5px rgba(0, 0, 0, 0.05), 0 20px 25px -5px rgba(0, 0, 0, 0.03);
+  --fs-shadow-float: 0 20px 35px -8px rgba(124, 58, 237, 0.12), 0 8px 18px -4px rgba(0, 0, 0, 0.07);
+  --fs-shadow-phone: 0 25px 45px -12px rgba(0, 0, 0, 0.35), 0 10px 22px -6px rgba(124, 58, 237, 0.22);
+}
+
+/* Outer Section Wrapper */
+.feature-section-wrapper {
+  width: 100%;
+  padding: 2.5rem 1.25rem;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* Main Container: Clean white background, rounded 28px outer container */
+.feature-section-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  background-color: var(--fs-container-bg);
+  border: 1px solid var(--fs-border);
+  border-radius: var(--fs-radius-container);
+  padding: 3.5rem 3rem;
+  box-shadow: var(--fs-shadow-container);
+  position: relative;
+  overflow: visible;
+  box-sizing: border-box;
+}
+
+/* 2-Column Desktop Layout (Vertically centered) */
+.feature-section-grid {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* LEFT COLUMN (~48% width) */
+.feature-left-col {
+  flex: 0 0 48%;
+  max-width: 48%;
+  position: relative;
+}
+
+/* RIGHT COLUMN (~52% width) */
+.feature-right-col {
+  flex: 0 0 52%;
+  max-width: 52%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  position: relative;
+}
+
+/* ==========================================================================
+   LEFT SIDE: HERO IMAGE & FLOATING CARD
+   ========================================================================== */
+
+.feature-image-wrapper {
+  position: relative;
+  width: 100%;
+  border-radius: var(--fs-radius-card);
+}
+
+.feature-image-frame {
+  width: 100%;
+  aspect-ratio: 4 / 3.35;
+  border-radius: var(--fs-radius-card);
+  overflow: hidden;
+  position: relative;
+  background-color: #F3F4F6;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 12px 28px -6px rgba(0, 0, 0, 0.06);
+}
+
+.feature-main-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.feature-image-wrapper:hover .feature-main-image {
+  transform: scale(1.025);
+}
+
+.feature-image-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 65%, rgba(0, 0, 0, 0.12) 100%);
+  pointer-events: none;
+}
+
+/* Hand-drawn decorative purple marks */
+.decor-sparkle-1 {
+  position: absolute;
+  top: -16px;
+  right: -12px;
+  color: var(--fs-accent-purple);
+  z-index: 3;
+  pointer-events: none;
+  animation: pulseSparkle 4s ease-in-out infinite alternate;
+}
+
+.decor-sparkle-2 {
+  position: absolute;
+  top: 36%;
+  left: -22px;
+  color: var(--fs-accent-purple);
+  z-index: 3;
+  pointer-events: none;
+}
+
+@keyframes pulseSparkle {
+  0% {
+    transform: scale(0.95) rotate(0deg);
+    opacity: 0.85;
+  }
+  100% {
+    transform: scale(1.08) rotate(6deg);
+    opacity: 1;
+  }
+}
+
+/* Floating Task/Project Card over bottom-left of image */
+.floating-task-card {
+  position: absolute;
+  bottom: -22px;
+  left: -18px;
+  background: #FFFFFF;
+  border-radius: var(--fs-radius-inner);
+  padding: 1.15rem 1.25rem;
+  box-shadow: var(--fs-shadow-float);
+  border: 1px solid rgba(229, 231, 235, 0.95);
+  width: 245px;
+  z-index: 10;
+  backdrop-filter: blur(8px);
+  animation: floatCard 4.5s ease-in-out infinite alternate;
+  box-sizing: border-box;
+}
+
+@keyframes floatCard {
+  0% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(-7px);
+  }
+}
+
+.task-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.85rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid #F3F4F6;
+}
+
+.task-card-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--fs-text-primary);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.task-card-pill {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--fs-accent-purple);
+  background: var(--fs-accent-purple-light);
+  padding: 2px 7px;
+  border-radius: var(--fs-radius-pill);
+}
+
+.task-card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.task-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.74rem;
+}
+
+.task-row-left {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.task-status-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.task-status-dot.completed {
+  background-color: #10B981;
+  color: #FFFFFF;
+}
+
+.task-status-dot.completed svg {
+  width: 10px;
+  height: 10px;
+}
+
+.task-status-dot.pending {
+  background-color: #F3F4F6;
+  border: 1.5px solid #D1D5DB;
+}
+
+.task-name {
+  color: var(--fs-text-primary);
+  font-weight: 600;
+}
+
+.task-state-label {
+  font-size: 0.66rem;
+  font-weight: 500;
+  color: var(--fs-text-muted);
+}
+
+.task-state-label.done {
+  color: #059669;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   RIGHT SIDE: CONTENT AREA & CHECKLIST
+   ========================================================================== */
+
+.feature-content-area {
+  flex: 1;
+  min-width: 290px;
+  max-width: 380px;
+}
+
+/* Eyebrow label: purple/blue accent, uppercase */
+.feature-eyebrow {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fs-accent-purple);
+  margin-bottom: 0.75rem;
+}
+
+/* Main Heading: 42-52px desktop, line-height 1.05-1.15, constrained 2 lines */
+.feature-heading {
+  font-size: 2.75rem;
+  line-height: 1.1;
+  font-weight: 800;
+  color: var(--fs-text-primary);
+  margin: 0 0 1.75rem 0;
+  letter-spacing: -0.03em;
+  max-width: 370px;
+}
+
+/* Feature Checklist */
+.feature-checklist {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2.25rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.checklist-item {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  font-size: 1.05rem;
+  color: var(--fs-text-secondary);
+  font-weight: 500;
+}
+
+.check-icon-circle {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-color: var(--fs-accent-purple);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  flex-shrink: 0;
+}
+
+.check-icon-circle svg {
+  width: 12px;
+  height: 12px;
+}
+
+.checklist-text {
+  line-height: 1.35;
+}
+
+/* Black Pill-shaped CTA Button */
+.feature-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  background-color: #000000;
+  color: #FFFFFF;
+  padding: 0.85rem 1.95rem;
+  border-radius: var(--fs-radius-pill);
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+}
+
+.feature-cta-btn:hover {
+  background-color: #1F2937;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.22);
+}
+
+.cta-arrow {
+  display: inline-block;
+  font-size: 1.15rem;
+  transition: transform 0.25s ease;
+}
+
+.feature-cta-btn:hover .cta-arrow {
+  transform: translateX(4px);
+}
+
+/* ==========================================================================
+   PHONE MOCKUP (Right Edge)
+   ========================================================================== */
+
+.phone-mockup-wrapper {
+  position: relative;
+  flex-shrink: 0;
+  width: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Soft Purple Abstract Blob behind the phone */
+.phone-purple-blob {
+  position: absolute;
+  width: 270px;
+  height: 270px;
+  background: radial-gradient(circle, var(--fs-accent-purple-blob) 0%, rgba(237, 233, 254, 0.45) 55%, transparent 75%);
+  border-radius: 50%;
+  filter: blur(22px);
+  z-index: 0;
+  pointer-events: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Thin Dotted/Dashed Curved Line */
+.phone-dashed-curve {
+  position: absolute;
+  top: -28px;
+  right: -24px;
+  width: 145px;
+  height: 145px;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.75;
+}
+
+/* Small outlined paper-plane icon */
+.paper-plane-icon {
+  position: absolute;
+  top: -18px;
+  right: 10px;
+  color: var(--fs-accent-purple);
+  opacity: 0.95;
+  z-index: 2;
+  animation: floatPlane 3.2s ease-in-out infinite alternate;
+}
+
+@keyframes floatPlane {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  100% {
+    transform: translateY(-6px) rotate(5deg);
+  }
+}
+
+/* Realistic Phone Frame */
+.phone-device-frame {
+  position: relative;
+  z-index: 2;
+  width: 195px;
+  border-radius: 38px;
+  background: #000000;
+  padding: 8px;
+  box-shadow: var(--fs-shadow-phone);
+  transform: rotate(4.5deg);
+  transition: transform 0.4s ease;
+  overflow: hidden;
+}
+
+.phone-device-frame:hover {
+  transform: rotate(2deg) scale(1.02);
+}
+
+/* Dynamic Island / Top Notch */
+.phone-top-island {
+  position: absolute;
+  top: 13px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 58px;
+  height: 13px;
+  background: #000000;
+  border-radius: 12px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 6px;
+  box-sizing: border-box;
+}
+
+.phone-island-camera {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #1E293B;
+  box-shadow: inset 0 0 2px rgba(255, 255, 255, 0.3);
+}
+
+/* Screen bezel & inner content */
+.phone-inner-screen {
+  background: #FFFFFF;
+  border-radius: 30px;
+  overflow: hidden;
+  position: relative;
+  min-height: 380px;
+}
+
+.phone-screen-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* Glass glare reflection */
+.phone-glass-glare {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 50%);
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* Project Management Dashboard inside Phone */
+.phone-screen-content {
+  padding: 2.2rem 0.85rem 1rem 0.85rem;
+  background: #FAFAFA;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: #111827;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.screen-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.screen-badge {
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: var(--fs-accent-purple);
+  background: var(--fs-accent-purple-light);
+  padding: 2px 6px;
+  border-radius: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.screen-time {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #6B7280;
+}
+
+.screen-project-card {
+  background: #FFFFFF;
+  border: 1px solid #E5E7EB;
+  border-radius: 12px;
+  padding: 0.75rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+}
+
+.screen-sub {
+  font-size: 0.58rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #9CA3AF;
+  letter-spacing: 0.05em;
+}
+
+.screen-title {
+  font-size: 0.85rem;
+  font-weight: 800;
+  margin: 0.2rem 0 0.5rem 0;
+  color: #111827;
+}
+
+.screen-due-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.35rem;
+}
+
+.screen-due-tag {
+  font-size: 0.62rem;
+  color: #4B5563;
+  font-weight: 500;
+}
+
+.screen-stat-pct {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--fs-accent-purple);
+}
+
+.screen-progress-bar {
+  width: 100%;
+  height: 5px;
+  background: #E5E7EB;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.screen-progress-fill {
+  height: 100%;
+  background: var(--fs-accent-purple);
+  border-radius: 4px;
+}
+
+/* Team section */
+.screen-team-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.screen-section-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: #6B7280;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.screen-avatar-group {
+  display: flex;
+  align-items: center;
+}
+
+.screen-avatar {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid #FFFFFF;
+  margin-left: -5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.55rem;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.screen-avatar:first-child {
+  margin-left: 0;
+}
+
+.screen-avatar.av-1 { background: #3B82F6; }
+.screen-avatar.av-2 { background: #10B981; }
+.screen-avatar.av-3 { background: #F59E0B; }
+.screen-avatar.av-more {
+  background: #6B7280;
+  font-size: 0.52rem;
+}
+
+/* Mini task list */
+.screen-tasks-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.screen-task-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: #FFFFFF;
+  padding: 0.35rem 0.5rem;
+  border-radius: 8px;
+  border: 1px solid #F3F4F6;
+  font-size: 0.64rem;
+  color: #374151;
+  font-weight: 500;
+}
+
+.screen-task-check {
+  font-size: 0.6rem;
+  color: #10B981;
+  font-weight: 800;
+}
+
+.screen-task-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--fs-accent-purple);
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN BREAKPOINTS
+   ========================================================================== */
+
+/* Tablet (768px - 1199px) */
+@media (max-width: 1199px) {
+  .feature-section-container {
+    padding: 3rem 2rem;
+  }
+
+  .feature-section-grid {
+    gap: 2.25rem;
+  }
+
+  .feature-heading {
+    font-size: 2.25rem;
+    margin-bottom: 1.35rem;
+    max-width: 320px;
+  }
+
+  .checklist-item {
+    font-size: 0.95rem;
+    gap: 0.75rem;
+  }
+
+  .check-icon-circle {
+    width: 20px;
+    height: 20px;
+  }
+
+  .phone-mockup-wrapper {
+    width: 175px;
+  }
+
+  .phone-device-frame {
+    width: 165px;
+    border-radius: 32px;
+  }
+
+  .floating-task-card {
+    width: 215px;
+    padding: 1rem;
+    left: -10px;
+    bottom: -15px;
+  }
+}
+
+/* Mobile (<768px) */
+@media (max-width: 767px) {
+  .feature-section-wrapper {
+    padding: 1.5rem 0.75rem;
+  }
+
+  .feature-section-container {
+    padding: 2rem 1.25rem;
+    border-radius: 20px;
+  }
+
+  /* Single Column Stack: Image first, content below */
+  .feature-section-grid {
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  .feature-left-col,
+  .feature-right-col {
+    flex: 1 1 100%;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .feature-right-col {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+  }
+
+  .feature-content-area {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .feature-heading {
+    font-size: 2rem;
+    line-height: 1.15;
+    margin-bottom: 1.25rem;
+    max-width: 100%;
+  }
+
+  .floating-task-card {
+    position: relative;
+    margin-top: -30px;
+    left: 10px;
+    bottom: auto;
+    width: calc(100% - 20px);
+    max-width: 320px;
+    animation: none;
+  }
+
+  .decor-sparkle-1 {
+    top: -10px;
+    right: 5px;
+    transform: scale(0.8);
+  }
+
+  .decor-sparkle-2 {
+    left: -5px;
+    transform: scale(0.8);
+  }
+
+  /* Phone Mockup Repositioned below content without horizontal scroll */
+  .phone-mockup-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+
+  .phone-device-frame {
+    width: 180px;
+    transform: rotate(0deg);
+  }
+
+  .phone-dashed-curve {
+    right: 15%;
+    width: 120px;
+    height: 120px;
+  }
+
+  .paper-plane-icon {
+    right: 22%;
+  }
+
+  .feature-cta-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 0.95rem 1.5rem;
+  }
+}

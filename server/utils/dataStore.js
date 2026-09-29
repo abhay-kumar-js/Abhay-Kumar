@@ -15,7 +15,7 @@ const initialProjects = [
     description:
       'High-conversion luxury oriental perfume e-commerce store with tailored fragrance collections, scent profiles, mobile-first checkout, and custom UI/UX design.',
     category: 'Shopify / Luxury Fragrances',
-    image: '/src/assets/images/project_arabianaroma_1790667348374.jpg',
+    image: '/assets/images/project_arabianaroma_1790667348374.jpg',
     url: 'https://arabianaroma.in/',
     technologies: ['Shopify', 'Liquid', 'Custom UI/UX', 'Speed Optimization', 'SEO'],
     featured: true,
@@ -30,7 +30,7 @@ const initialProjects = [
     description:
       'High-converting Shopify e-commerce website for handcrafted ethnic juttis and seasonal footwear with custom collection filters, fast mobile cart drawer, and seamless checkout.',
     category: 'Shopify / Footwear E-Commerce',
-    image: '/src/assets/images/project_fusionwalks_1790667305126.jpg',
+    image: '/assets/images/project_fusionwalks_1790667305126.jpg',
     url: 'https://www.fusionwalks.com/',
     technologies: ['Shopify', 'E-Commerce', 'Custom Theme', 'CRO', 'Mobile UX'],
     featured: true,
@@ -45,7 +45,7 @@ const initialProjects = [
     description:
       'Boutique luxury perfume e-commerce store featuring a signature dark-gold aesthetic, olfactory note pyramid breakdowns, automated cart drawer, and high performance.',
     category: 'Shopify / Luxury Perfumes',
-    image: '/src/assets/images/project_fragobar_1790667321204.jpg',
+    image: '/assets/images/project_fragobar_1790667321204.jpg',
     url: 'https://fragobar.com/',
     technologies: ['Shopify', 'Luxury Branding', 'Custom Sections', 'Core Web Vitals'],
     featured: true,
@@ -60,7 +60,7 @@ const initialProjects = [
     description:
       'Sophisticated e-commerce store for designer women handbags, clutches, and leather accessories with minimalist editorial styling, lookbooks, and high conversion rate.',
     category: 'Shopify / Women Handbags',
-    image: '/src/assets/images/project_routica_1790667336453.jpg',
+    image: '/assets/images/project_routica_1790667336453.jpg',
     url: 'https://www.routica.in/',
     technologies: ['Shopify', 'Fashion & Apparel', 'Liquid', 'Multi-Currency'],
     featured: true,
@@ -75,7 +75,7 @@ const initialProjects = [
     description:
       'A premium digital presence designed for a modern jewelry-focused brand, combining visual presentation with an elegant user experience.',
     category: 'Shopify / Fine Jewelry',
-    image: '/src/assets/images/project_celestia_carat_1790582211499.jpg',
+    image: '/assets/images/project_celestia_carat_1790582211499.jpg',
     url: 'https://celestiacarat.in/',
     technologies: ['Shopify', 'Liquid', 'Responsive UI', 'Search Optimization'],
     featured: true,
@@ -90,7 +90,7 @@ const initialProjects = [
     description:
       'A modern online shopping experience built on React.js and Node.js REST APIs with responsive design, instant client-side transitions, and smooth customer checkout journey.',
     category: 'MERN Stack / Modern Storefront',
-    image: '/src/assets/images/project_the_coed_1790582223025.jpg',
+    image: '/assets/images/project_the_coed_1790582223025.jpg',
     url: 'https://thecoed.in/',
     technologies: ['MERN', 'React.js', 'Node.js', 'Express', 'MongoDB', 'REST APIs'],
     featured: true,
@@ -105,7 +105,7 @@ const initialProjects = [
     description:
       'Comprehensive corporate web platform and digital service showcase built for Real Victory Group with responsive layout, custom Elementor modules, and seamless cross-platform user experience.',
     category: 'WordPress & Frontend / Agency Platform',
-    image: '/src/assets/images/project_realvictory_mockup_1790672832887.jpg',
+    image: '/assets/images/project_realvictory_mockup_1790672832887.jpg',
     url: '',
     technologies: ['WordPress', 'Elementor Pro', 'React.js', 'Custom Theme', 'Responsive UI'],
     featured: true,
@@ -120,7 +120,7 @@ const initialProjects = [
     description:
       'Full-featured custom WordPress and WooCommerce e-commerce website with tailored theme architecture, product catalog, payment gateway integration, and Core Web Vitals optimization.',
     category: 'WordPress / WooCommerce Store',
-    image: '/src/assets/images/project_wp_woocommerce_mockup_1790672849871.jpg',
+    image: '/assets/images/project_wp_woocommerce_mockup_1790672849871.jpg',
     url: '',
     technologies: ['WordPress', 'WooCommerce', 'Elementor', 'PHP', 'SEO & Speed'],
     featured: true,

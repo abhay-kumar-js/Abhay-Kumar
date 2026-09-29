@@ -117,7 +117,7 @@ export const ProjectDetails = () => {
       <div className="relative rounded-2xl overflow-hidden bg-slate-100 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 aspect-video shadow-2xl">
         {!imageError && project.image ? (
           <img
-            src={project.image}
+            src={project.image.replace(/^\/src\/assets\/images\//, '/assets/images/')}
             alt={`${project.title} live interface preview`}
             referrerPolicy="no-referrer"
             onError={() => setImageError(true)}

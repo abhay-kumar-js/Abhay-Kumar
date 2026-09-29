@@ -1,8 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowUp, Lock, GitBranch } from 'lucide-react';
+import {
+  ArrowUp,
+  Lock,
+  GitBranch,
+  Mail,
+  Phone,
+  MapPin,
+  Download,
+  Copy,
+  Check,
+  ExternalLink,
+  Code2,
+  Sparkles,
+  ShoppingBag,
+  Globe,
+  Zap,
+} from 'lucide-react';
 
 export const Footer = () => {
+  const [copiedEmail, setCopiedEmail] = useState(false);
+
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'About', path: '/about' },
@@ -13,85 +31,190 @@ export const Footer = () => {
     { name: 'Contact', path: '/contact' },
   ];
 
+  const serviceLinks = [
+    { name: 'MERN Stack Applications', path: '/contact?service=MERN+Stack+Development' },
+    { name: 'Custom Shopify Stores & Liquid', path: '/contact?service=Shopify+E-Commerce+Store' },
+    { name: 'WordPress & WooCommerce', path: '/contact?service=WordPress+Development' },
+    { name: 'Core Web Vitals & Speed Optimization', path: '/contact?service=Website+Optimization' },
+    { name: 'SEO Architecture & Indexing', path: '/contact?service=SEO' },
+  ];
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const copyToClipboard = (text) => {
+    navigator.clipboard.writeText(text);
+    setCopiedEmail(true);
+    setTimeout(() => setCopiedEmail(false), 2200);
+  };
+
   return (
-    <footer className="py-12 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-[#06080D] relative transition-colors duration-200">
+    <footer className="border-t border-slate-200 dark:border-slate-800/80 bg-white dark:bg-[#070A11] relative transition-colors duration-200 pt-16 pb-12">
       <div className="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-24">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-slate-200 dark:border-slate-800/80">
-          {/* Brand & Subtitle */}
-          <div className="text-center md:text-left">
-            <Link to="/" className="text-xl font-bold font-display text-slate-900 dark:text-white tracking-tight hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-              Abhay Kumar
-            </Link>
-            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 font-mono mt-1">
-              Web Developer • MERN Stack • Shopify • WordPress • SEO
+        {/* Main Footer Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12 pb-12 border-b border-slate-200 dark:border-slate-800/80">
+          {/* Column 1: Brand & Availability (Col Span 5) */}
+          <div className="lg:col-span-5 space-y-5">
+            <div>
+              <Link
+                to="/"
+                className="text-2xl font-bold font-display text-slate-900 dark:text-white tracking-tight hover:text-blue-600 dark:hover:text-blue-400 transition-colors inline-flex items-center gap-2"
+              >
+                <span className="w-2.5 h-2.5 rounded-full bg-blue-500" />
+                <span>Abhay Kumar</span>
+              </Link>
+              <p className="text-xs font-mono text-blue-600 dark:text-blue-400 font-semibold mt-1">
+                Full-Stack Web Developer &bull; MERN &bull; Shopify &bull; WordPress
+              </p>
+            </div>
+
+            <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed max-w-md">
+              Engineering high-performance web applications, bespoke Shopify storefronts, and search-optimized digital platforms that convert visitors into loyal customers.
             </p>
-            <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 mt-2 text-xs font-mono text-slate-500 dark:text-slate-400">
-              <a href="mailto:algoaxisoftech@gmail.com" className="text-blue-600 dark:text-blue-400 hover:underline">
-                algoaxisoftech@gmail.com
-              </a>
-              <span className="text-slate-400 dark:text-slate-600">·</span>
-              <a href="tel:+917379289932" className="text-emerald-600 dark:text-emerald-400 hover:underline">
-                +91-7379289932
-              </a>
-              <span className="text-slate-400 dark:text-slate-600">·</span>
+
+            {/* Availability Status Badge */}
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              </span>
+              <span className="font-mono text-slate-700 dark:text-slate-300 font-medium">
+                Available for New Client Projects &amp; Contracts
+              </span>
+            </div>
+
+            {/* Direct Copy Email Action */}
+            <div className="pt-2">
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => copyToClipboard('algoaxisoftech@gmail.com')}
+                  className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-900 dark:hover:bg-slate-800 border border-slate-300 dark:border-slate-800 text-xs font-mono text-slate-800 dark:text-slate-200 transition-all cursor-pointer shadow-xs group"
+                  title="Click to copy email address"
+                >
+                  <Mail className="w-3.5 h-3.5 text-blue-500 dark:text-blue-400" />
+                  <span>algoaxisoftech@gmail.com</span>
+                  {copiedEmail ? (
+                    <Check className="w-3.5 h-3.5 text-emerald-500 ml-1" />
+                  ) : (
+                    <Copy className="w-3 h-3 text-slate-400 group-hover:text-slate-600 dark:group-hover:text-slate-200 ml-1" />
+                  )}
+                </button>
+                {copiedEmail && (
+                  <span className="text-[11px] font-mono text-emerald-600 dark:text-emerald-400 font-medium animate-in fade-in">
+                    Copied!
+                  </span>
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* Column 2: Navigation Links (Col Span 2) */}
+          <div className="lg:col-span-2 space-y-4">
+            <p className="text-xs font-mono uppercase tracking-wider font-semibold text-slate-900 dark:text-slate-200">
+              Navigation
+            </p>
+            <ul className="space-y-2.5 text-xs sm:text-sm font-medium">
+              {navLinks.map((link) => (
+                <li key={link.name}>
+                  <Link
+                    to={link.path}
+                    className="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-white transition-colors block py-0.5"
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Column 3: Services (Col Span 3) */}
+          <div className="lg:col-span-3 space-y-4">
+            <p className="text-xs font-mono uppercase tracking-wider font-semibold text-slate-900 dark:text-slate-200">
+              Core Capabilities
+            </p>
+            <ul className="space-y-2.5 text-xs sm:text-sm">
+              {serviceLinks.map((service) => (
+                <li key={service.name}>
+                  <Link
+                    to={service.path}
+                    className="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-white transition-colors block py-0.5 line-clamp-1"
+                  >
+                    {service.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Column 4: Direct Connect & Downloads (Col Span 2) */}
+          <div className="lg:col-span-2 space-y-4">
+            <p className="text-xs font-mono uppercase tracking-wider font-semibold text-slate-900 dark:text-slate-200">
+              Connect &amp; Specs
+            </p>
+            <div className="space-y-3 text-xs">
               <a
                 href="https://github.com/abhay-kumar-js"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-white transition-colors inline-flex items-center gap-1.5 hover:underline"
+                className="flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-white transition-colors group"
               >
-                <GitBranch className="w-3.5 h-3.5 text-blue-500 dark:text-blue-400" />
-                <span>github.com/abhay-kumar-js</span>
+                <GitBranch className="w-3.5 h-3.5 text-blue-500 dark:text-blue-400 group-hover:scale-110 transition-transform" />
+                <span className="font-mono truncate">github.com/abhay-kumar-js</span>
               </a>
-            </div>
-          </div>
 
-          {/* Navigation Links */}
-          <nav className="flex flex-wrap items-center justify-center gap-6" aria-label="Footer Navigation">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                to={link.path}
-                className="text-xs uppercase tracking-wider font-semibold text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-white transition-colors"
+              <a
+                href="tel:+917379289932"
+                className="flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
               >
-                {link.name}
-              </Link>
-            ))}
-          </nav>
+                <Phone className="w-3.5 h-3.5 text-emerald-500" />
+                <span className="font-mono">+91-7379289932</span>
+              </a>
 
-          {/* Back to top button */}
-          <div>
-            <button
-              onClick={scrollToTop}
-              className="inline-flex items-center gap-2 px-3.5 py-2 text-xs font-mono font-medium text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white bg-slate-100 dark:bg-slate-900 border border-slate-300 dark:border-slate-800 rounded-lg hover:border-slate-400 dark:hover:border-slate-700 transition-colors cursor-pointer shadow-sm"
-              aria-label="Scroll back to top"
-            >
-              <span>Back to Top</span>
-              <ArrowUp className="w-3.5 h-3.5 text-blue-500 dark:text-blue-400" />
-            </button>
+              <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400">
+                <MapPin className="w-3.5 h-3.5 text-blue-500" />
+                <span className="font-mono">India (Remote Global)</span>
+              </div>
+
+              <div className="pt-2">
+                <a
+                  href="/assets/Abhay_Kumar_Resume.pdf"
+                  download="Abhay_Kumar_Resume.pdf"
+                  className="w-full inline-flex items-center justify-center gap-2 px-3.5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-mono font-semibold transition-all shadow-md shadow-blue-600/20"
+                >
+                  <Download className="w-3.5 h-3.5" />
+                  <span>Resume (PDF)</span>
+                </a>
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Bottom row: Copyright + Admin Access Link */}
+        {/* Bottom Bar: Copyright, Code Standards & Admin Link */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-500 dark:text-slate-400">
           <p>© 2026 Abhay Kumar. All rights reserved.</p>
-          <div className="flex items-center gap-4">
-            <span className="text-slate-500 dark:text-slate-400">
-              Crafted for speed, modern aesthetics, and measurable impact.
-            </span>
+
+          <div className="flex flex-wrap items-center justify-center gap-4 text-center sm:text-left">
+            <span>Built with React 19, Tailwind CSS &amp; Node.js</span>
+            <span className="text-slate-300 dark:text-slate-700 hidden sm:inline">&bull;</span>
             <Link
               to="/admin/login"
-              className="inline-flex items-center gap-1 text-[11px] text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-slate-200 transition-colors"
+              className="inline-flex items-center gap-1.5 text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-white transition-colors"
               title="Admin Portal"
             >
-              <Lock className="w-3 h-3" />
-              <span>Admin</span>
+              <Lock className="w-3 h-3 text-slate-400" />
+              <span>Admin Portal</span>
             </Link>
           </div>
+
+          <button
+            onClick={scrollToTop}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-900 dark:hover:bg-slate-800 border border-slate-300 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer shadow-xs"
+            aria-label="Scroll back to top"
+          >
+            <span>Top</span>
+            <ArrowUp className="w-3.5 h-3.5 text-blue-500" />
+          </button>
         </div>
       </div>
     </footer>
