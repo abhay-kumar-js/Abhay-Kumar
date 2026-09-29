@@ -83,6 +83,12 @@ export const createApp = async () => {
   app.use('/api/settings', settingsRoutes);
   app.use('/api/github', githubRoutes);
 
+  // Catch unhandled /api/* routes
+  app.use('/api/*', notFound);
+
+  // API error handling
+  app.use(errorHandler);
+
   return app;
 };
 

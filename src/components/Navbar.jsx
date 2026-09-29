@@ -178,6 +178,10 @@ export const Navbar = () => {
                 PDF
               </span>
             </a>
+            <div className="pt-2 px-1 flex items-center justify-between border-t border-slate-200 dark:border-slate-800/80">
+              <span className="text-xs font-mono font-medium text-slate-600 dark:text-slate-400">Display Theme</span>
+              <ThemeToggle showLabel={true} />
+            </div>
           </nav>
           <div className="pt-3 border-t border-slate-200 dark:border-slate-800 max-w-xl mx-auto sm:hidden flex flex-col gap-3">
             <Link

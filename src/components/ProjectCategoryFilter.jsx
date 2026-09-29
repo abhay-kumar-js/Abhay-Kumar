@@ -87,8 +87,8 @@ export const ProjectCategoryFilter = ({
             onClick={() => onSelectCategory(cat.id)}
             className={`relative group inline-flex items-center gap-2 px-3.5 sm:px-4 py-2 rounded-xl text-xs font-mono font-medium transition-all duration-200 shrink-0 cursor-pointer ${
               isSelected
-                ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/25 border border-blue-500'
-                : 'bg-slate-900/90 text-slate-400 hover:text-white border border-slate-800 hover:border-slate-700 hover:bg-slate-850'
+                ? 'bg-blue-600 text-white shadow-md shadow-blue-600/25 border border-blue-500'
+                : 'bg-white dark:bg-slate-900/90 text-slate-700 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white border border-slate-300 dark:border-slate-800 hover:border-slate-400 dark:hover:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 shadow-sm'
             }`}
           >
             {isSelected && (
@@ -100,7 +100,7 @@ export const ProjectCategoryFilter = ({
             )}
             <Icon
               className={`w-3.5 h-3.5 transition-transform group-hover:scale-110 ${
-                isSelected ? 'text-white' : 'text-slate-400 group-hover:text-blue-400'
+                isSelected ? 'text-white' : 'text-slate-500 dark:text-slate-400 group-hover:text-blue-600 dark:group-hover:text-blue-400'
               }`}
             />
             <span className="font-semibold">{cat.label}</span>
@@ -108,7 +108,7 @@ export const ProjectCategoryFilter = ({
               className={`text-[10px] px-1.5 py-0.2 rounded-full font-bold transition-colors ${
                 isSelected
                   ? 'bg-blue-800/80 text-blue-100'
-                  : 'bg-slate-800 text-slate-400 group-hover:text-slate-300'
+                  : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-slate-200'
               }`}
             >
               {count}

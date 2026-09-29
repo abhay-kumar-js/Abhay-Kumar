@@ -33,13 +33,13 @@ export const Services = () => {
     <div className="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-24 py-12 sm:py-16 space-y-16">
       {/* Page Header */}
       <div className="max-w-5xl">
-        <p className="text-xs uppercase tracking-widest font-semibold text-blue-400 mb-2 font-mono">
+        <p className="text-xs uppercase tracking-widest font-semibold text-blue-600 dark:text-blue-400 mb-2 font-mono">
           Services &amp; Offerings
         </p>
-        <h1 className="text-3xl sm:text-5xl font-bold font-display tracking-tight text-white mb-4">
+        <h1 className="text-3xl sm:text-5xl font-bold font-display tracking-tight text-slate-900 dark:text-white mb-4">
           What I Do
         </h1>
-        <p className="text-base sm:text-lg text-slate-300 leading-relaxed">
+        <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
           From idea to launch, I help businesses build, optimize, and maintain their digital presence using modern web technologies.
         </p>
       </div>
@@ -48,11 +48,11 @@ export const Services = () => {
       {loading ? (
         <Loader message="Loading service offerings from API..." size="large" />
       ) : error ? (
-        <div className="p-8 rounded-2xl bg-rose-950/30 border border-rose-800 text-center text-rose-300">
+        <div className="p-8 rounded-2xl bg-rose-50 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-800 text-center text-rose-600 dark:text-rose-300">
           <p className="text-sm font-semibold">{error}</p>
           <button
             onClick={() => window.location.reload()}
-            className="mt-4 px-4 py-2 text-xs font-mono uppercase bg-rose-600 hover:bg-rose-500 text-white rounded-lg"
+            className="mt-4 px-4 py-2 text-xs font-mono uppercase bg-rose-600 hover:bg-rose-500 text-white rounded-lg shadow-sm"
           >
             Retry
           </button>
@@ -66,12 +66,12 @@ export const Services = () => {
       )}
 
       {/* Process summary banner */}
-      <div className="p-8 sm:p-10 rounded-2xl bg-[#0F172A] border border-slate-800 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div className="p-8 sm:p-10 rounded-2xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl shadow-slate-900/5 dark:shadow-none">
         <div className="space-y-2 text-center md:text-left">
-          <h2 className="text-xl font-bold font-display text-white">
+          <h2 className="text-xl font-bold font-display text-slate-900 dark:text-white">
             Need a tailored scope or custom integration?
           </h2>
-          <p className="text-xs sm:text-sm text-slate-400 max-w-xl">
+          <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-xl">
             I deliver end-to-end solutions combining custom full-stack development, headless e-commerce, and high-performance search optimization.
           </p>
         </div>

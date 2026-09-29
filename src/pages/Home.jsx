@@ -16,6 +16,7 @@ import { api } from '../services/api.js';
 import { PROJECTS } from '../data/portfolioData.ts';
 import ProjectCard from '../components/ProjectCard.jsx';
 import ProjectCategoryFilter, { matchesProjectCategory } from '../components/ProjectCategoryFilter.jsx';
+import ProjectDetailsModal from '../components/ProjectDetailsModal.jsx';
 import ServiceCard from '../components/ServiceCard.jsx';
 import TestimonialCarousel from '../components/TestimonialCarousel.jsx';
 import GitHubActivitySection from '../components/GitHubActivitySection.jsx';
@@ -28,6 +29,7 @@ export const Home = () => {
   const [loading, setLoading] = useState(true);
   const [imageError, setImageError] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('All');
+  const [selectedProject, setSelectedProject] = useState(null);
 
   useEffect(() => {
     document.title = 'Abhay Kumar | Web Developer | MERN Stack, Shopify & WordPress';
@@ -53,6 +55,7 @@ export const Home = () => {
               image: p.image,
               url: p.url,
               technologies: p.tags,
+              highlights: p.highlights,
               featured: true,
             }))
           );
@@ -77,6 +80,13 @@ export const Home = () => {
 
   return (
     <div className="space-y-24 pb-20">
+      {/* Interactive Project Details Modal */}
+      <ProjectDetailsModal
+        project={selectedProject}
+        isOpen={!!selectedProject}
+        onClose={() => setSelectedProject(null)}
+      />
+
       {/* HERO SECTION */}
       <section className="relative min-h-[85vh] flex items-center justify-center pt-8 pb-12 overflow-hidden">
         {/* Background glow effects */}
@@ -87,36 +97,36 @@ export const Home = () => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             {/* Left Column: Headlines & CTA */}
             <div className="lg:col-span-7 flex flex-col items-start text-left">
-              <div className="inline-flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-slate-900/80 border border-slate-800 text-xs text-slate-300 mb-6">
+              <div className="inline-flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 text-xs text-slate-700 dark:text-slate-300 shadow-sm mb-6">
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                 </span>
-                <span className="font-medium text-slate-200">Available for New Projects</span>
-                <span className="text-slate-500" aria-hidden="true">·</span>
-                <span className="text-blue-400 font-semibold font-mono">3+ Years Experience</span>
+                <span className="font-medium text-slate-800 dark:text-slate-200">Available for New Projects</span>
+                <span className="text-slate-400 dark:text-slate-500" aria-hidden="true">·</span>
+                <span className="text-blue-600 dark:text-blue-400 font-semibold font-mono">3+ Years Experience</span>
               </div>
 
-              {/* Refined decreased font size for balanced, sleek hierarchy */}
-              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold font-display tracking-tight text-white leading-[1.2] mb-5 max-w-3xl text-balance">
+              {/* Sleek, responsive hierarchy */}
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold font-display tracking-tight text-slate-900 dark:text-white leading-[1.2] mb-5 max-w-3xl text-balance">
                 Building Modern Websites &amp; Digital Experiences That Grow Businesses.
               </h1>
 
-              <p className="text-sm sm:text-base lg:text-lg text-slate-300 leading-relaxed mb-6 max-w-2xl">
+              <p className="text-sm sm:text-base lg:text-lg text-slate-600 dark:text-slate-300 leading-relaxed mb-6 max-w-2xl">
                 I'm Abhay Kumar, a Web Developer with 3+ years of experience building modern websites, e-commerce stores, and high-performance full-stack web applications.
               </p>
 
               {/* Technologies Line */}
-              <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-xs sm:text-sm font-medium text-slate-400 mb-8 border-l-2 border-blue-500 pl-4 py-1">
-                <span className="text-slate-200">MERN Stack</span>
-                <span className="text-blue-400" aria-hidden="true">•</span>
-                <span className="text-slate-200">Shopify</span>
-                <span className="text-blue-400" aria-hidden="true">•</span>
-                <span className="text-slate-200">WordPress</span>
-                <span className="text-blue-400" aria-hidden="true">•</span>
-                <span className="text-slate-200">SEO</span>
-                <span className="text-blue-400" aria-hidden="true">•</span>
-                <span className="text-slate-200">Graphic Design</span>
+              <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-xs sm:text-sm font-medium text-slate-500 dark:text-slate-400 mb-8 border-l-2 border-blue-500 pl-4 py-1">
+                <span className="text-slate-800 dark:text-slate-200 font-semibold">MERN Stack</span>
+                <span className="text-blue-500" aria-hidden="true">•</span>
+                <span className="text-slate-800 dark:text-slate-200 font-semibold">Shopify</span>
+                <span className="text-blue-500" aria-hidden="true">•</span>
+                <span className="text-slate-800 dark:text-slate-200 font-semibold">WordPress</span>
+                <span className="text-blue-500" aria-hidden="true">•</span>
+                <span className="text-slate-800 dark:text-slate-200 font-semibold">SEO</span>
+                <span className="text-blue-500" aria-hidden="true">•</span>
+                <span className="text-slate-800 dark:text-slate-200 font-semibold">Graphic Design</span>
               </div>
 
               {/* CTA Buttons */}
@@ -132,16 +142,16 @@ export const Home = () => {
                 <a
                   href="/assets/Abhay_Kumar_Resume.pdf"
                   download="Abhay_Kumar_Resume.pdf"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3.5 text-xs font-bold uppercase tracking-wider text-slate-200 bg-slate-900/90 hover:bg-slate-800 hover:text-white border border-slate-700/80 rounded-xl transition-all hover:-translate-y-0.5"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3.5 text-xs font-bold uppercase tracking-wider text-slate-800 dark:text-slate-200 bg-white hover:bg-slate-100 dark:bg-slate-900/90 dark:hover:bg-slate-800 hover:text-blue-600 dark:hover:text-white border border-slate-300 dark:border-slate-700/80 rounded-xl transition-all hover:-translate-y-0.5 shadow-sm"
                   title="Download Abhay Kumar's Official Resume"
                 >
-                  <Download className="w-4 h-4 text-blue-400" />
+                  <Download className="w-4 h-4 text-blue-500 dark:text-blue-400" />
                   <span>Download Resume</span>
                 </a>
 
                 <Link
                   to="/contact"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3.5 text-xs font-bold uppercase tracking-wider text-slate-300 hover:text-white hover:bg-slate-900/60 border border-transparent hover:border-slate-800 rounded-xl transition-all"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3.5 text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-900/60 border border-slate-200 dark:border-transparent hover:border-slate-300 dark:hover:border-slate-800 rounded-xl transition-all"
                 >
                   <span>Contact Me</span>
                   <ArrowRight className="w-3.5 h-3.5" />
@@ -149,18 +159,18 @@ export const Home = () => {
               </div>
 
               {/* Trust Indicators */}
-              <div className="pt-6 border-t border-slate-800/80 w-full flex flex-col sm:flex-row sm:items-center gap-4 text-xs text-slate-400">
+              <div className="pt-6 border-t border-slate-200 dark:border-slate-800/80 w-full flex flex-col sm:flex-row sm:items-center gap-4 text-xs text-slate-500 dark:text-slate-400">
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <span className="font-semibold text-slate-200">3+ Years Experience</span>
+                  <CheckCircle2 className="w-4 h-4 text-emerald-500 dark:text-emerald-400 shrink-0" />
+                  <span className="font-semibold text-slate-800 dark:text-slate-200">3+ Years Experience</span>
                 </div>
-                <span className="hidden sm:inline text-slate-600" aria-hidden="true">•</span>
+                <span className="hidden sm:inline text-slate-400 dark:text-slate-600" aria-hidden="true">•</span>
                 <div className="flex items-center gap-2">
-                  <span className="text-slate-300">MERN Stack</span>
-                  <span className="text-slate-600" aria-hidden="true">•</span>
-                  <span className="text-slate-300">Shopify Expert</span>
-                  <span className="text-slate-600" aria-hidden="true">•</span>
-                  <span className="text-slate-300">SEO &amp; Performance</span>
+                  <span className="text-slate-700 dark:text-slate-300 font-medium">MERN Stack</span>
+                  <span className="text-slate-400 dark:text-slate-600" aria-hidden="true">•</span>
+                  <span className="text-slate-700 dark:text-slate-300 font-medium">Shopify Expert</span>
+                  <span className="text-slate-400 dark:text-slate-600" aria-hidden="true">•</span>
+                  <span className="text-slate-700 dark:text-slate-300 font-medium">SEO &amp; Performance</span>
                 </div>
               </div>
             </div>
@@ -218,34 +228,24 @@ export const Home = () => {
                           scale: [1, 1.015, 1],
                         }}
                         transition={{
-                          duration: 7,
+                          duration: 4,
                           repeat: Infinity,
                           ease: 'easeInOut',
                         }}
-                        className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                        className="w-full h-full object-cover object-top filter brightness-105 contrast-105"
                       />
                     ) : (
                       <div className="w-full h-full flex flex-col items-center justify-center p-8 bg-slate-900 text-center">
-                        <Code2 className="w-16 h-16 text-blue-400 mb-4 stroke-1" />
-                        <p className="font-display font-bold text-white text-lg mb-1">Abhay Kumar</p>
-                        <p className="text-xs text-slate-400">Full-Stack Web Developer · 3+ Years</p>
+                        <Code2 className="w-16 h-16 text-blue-400 mb-3 stroke-1" />
+                        <h3 className="font-display font-bold text-white text-xl">Abhay Kumar</h3>
+                        <p className="text-xs text-slate-400 font-mono mt-1">Web Developer &amp; MERN Engineer</p>
                       </div>
                     )}
 
-                    {/* Floating Metric Badges with Framer Motion */}
                     <motion.div
-                      animate={{ y: [0, -6, 0], x: [0, 2, 0] }}
-                      transition={{ duration: 4.2, repeat: Infinity, ease: 'easeInOut' }}
-                      className="absolute top-3 left-3 px-3 py-1.5 rounded-xl bg-slate-950/85 backdrop-blur-md border border-white/10 shadow-lg flex items-center gap-1.5"
-                    >
-                      <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-                      <span className="text-[11px] font-semibold text-white font-mono">Shopify Partner</span>
-                    </motion.div>
-
-                    <motion.div
-                      animate={{ y: [0, 6, 0], x: [0, -2, 0] }}
-                      transition={{ duration: 4.8, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
-                      className="absolute top-3 right-3 px-3 py-1.5 rounded-xl bg-blue-950/85 backdrop-blur-md border border-blue-500/30 shadow-lg flex items-center gap-1.5"
+                      animate={{ y: [0, 4, 0] }}
+                      transition={{ duration: 4.8, repeat: Infinity, ease: 'easeInOut' }}
+                      className="absolute top-4 right-4 px-3 py-1.5 rounded-xl bg-slate-900/90 backdrop-blur-md border border-white/10 shadow-lg flex items-center gap-2"
                     >
                       <span className="w-2 h-2 rounded-full bg-blue-400" />
                       <span className="text-[11px] font-bold text-blue-200 font-mono">3+ Yrs Exp</span>
@@ -296,18 +296,18 @@ export const Home = () => {
 
       {/* FEATURED PROJECTS SECTION */}
       <section className="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-24">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6 pb-4 border-b border-slate-800">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6 pb-4 border-b border-slate-200 dark:border-slate-800">
           <div>
-            <p className="text-xs font-mono uppercase tracking-widest text-blue-400 font-semibold mb-1">
+            <p className="text-xs font-mono uppercase tracking-widest text-blue-600 dark:text-blue-400 font-semibold mb-1">
               Selected Work
             </p>
-            <h2 className="text-2xl sm:text-3xl font-bold font-display text-white">
+            <h2 className="text-2xl sm:text-3xl font-bold font-display text-slate-900 dark:text-white">
               Featured Client Projects
             </h2>
           </div>
           <Link
             to="/projects"
-            className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold uppercase tracking-wider text-blue-400 hover:text-blue-300"
+            className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold uppercase tracking-wider text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300"
           >
             <span>View All Projects</span>
             <ArrowRight className="w-3.5 h-3.5" />
@@ -337,14 +337,17 @@ export const Home = () => {
                   exit={{ opacity: 0, scale: 0.96 }}
                   transition={{ duration: 0.28 }}
                 >
-                  <ProjectCard project={project} />
+                  <ProjectCard
+                    project={project}
+                    onViewDetails={(p) => setSelectedProject(p)}
+                  />
                 </motion.div>
               ))}
             </AnimatePresence>
           </motion.div>
         ) : (
-          <div className="text-center py-12 p-6 rounded-2xl bg-slate-900/40 border border-slate-800">
-            <p className="text-slate-400 font-mono text-sm">No projects found in "{selectedCategory}".</p>
+          <div className="text-center py-12 p-6 rounded-2xl bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800">
+            <p className="text-slate-600 dark:text-slate-400 font-mono text-sm">No projects found in "{selectedCategory}".</p>
             <button
               onClick={() => setSelectedCategory('All')}
               className="mt-3 px-4 py-2 rounded-xl bg-blue-600 text-white text-xs font-mono font-semibold hover:bg-blue-500 transition-colors"
@@ -362,18 +365,18 @@ export const Home = () => {
 
       {/* CORE SERVICES PREVIEW */}
       <section className="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-24">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10 pb-4 border-b border-slate-800">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10 pb-4 border-b border-slate-200 dark:border-slate-800">
           <div>
-            <p className="text-xs font-mono uppercase tracking-widest text-blue-400 font-semibold mb-1">
+            <p className="text-xs font-mono uppercase tracking-widest text-blue-600 dark:text-blue-400 font-semibold mb-1">
               Core Capabilities
             </p>
-            <h2 className="text-2xl sm:text-3xl font-bold font-display text-white">
+            <h2 className="text-2xl sm:text-3xl font-bold font-display text-slate-900 dark:text-white">
               What I Deliver For Clients
             </h2>
           </div>
           <Link
             to="/services"
-            className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold uppercase tracking-wider text-blue-400 hover:text-blue-300"
+            className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold uppercase tracking-wider text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300"
           >
             <span>View All Services</span>
             <ArrowRight className="w-3.5 h-3.5" />
@@ -398,12 +401,12 @@ export const Home = () => {
 
       {/* CALL TO ACTION SECTION */}
       <section className="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-24">
-        <div className="p-8 sm:p-14 rounded-3xl bg-gradient-to-r from-blue-950/40 via-[#0E1628] to-slate-900 border border-blue-500/20 text-center relative overflow-hidden">
+        <div className="p-8 sm:p-14 rounded-3xl bg-gradient-to-r from-blue-50 via-slate-100 to-blue-100/50 dark:from-blue-950/40 dark:via-[#0E1628] dark:to-slate-900 border border-blue-200 dark:border-blue-500/20 text-center relative overflow-hidden shadow-xl shadow-slate-900/5 dark:shadow-none">
           <div className="relative z-10 max-w-2xl mx-auto space-y-5">
-            <h2 className="text-2xl sm:text-4xl font-bold font-display text-white tracking-tight">
+            <h2 className="text-2xl sm:text-4xl font-bold font-display text-slate-900 dark:text-white tracking-tight">
               Ready to build something impactful together?
             </h2>
-            <p className="text-sm sm:text-base text-slate-300">
+            <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300">
               Whether you need a custom MERN stack web app, a high-converting Shopify store, or performance-optimized WordPress site, let's talk.
             </p>
             <div className="pt-2">

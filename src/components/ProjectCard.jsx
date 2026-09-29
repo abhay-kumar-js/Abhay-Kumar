@@ -1,9 +1,22 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ExternalLink, ArrowRight, Code2, Eye } from 'lucide-react';
+import { ExternalLink, ArrowRight, Code2, CheckCircle2 } from 'lucide-react';
+import { PROJECTS } from '../data/portfolioData.ts';
 
 export const ProjectCard = ({ project, onViewDetails }) => {
   const [imageError, setImageError] = useState(false);
+
+  // Retrieve brief highlights from project object or fallback to portfolio data
+  const fallbackMatch = PROJECTS.find(
+    (p) =>
+      p.id === (project.slug || project.id) ||
+      p.name.toLowerCase() === (project.title || project.name || '').toLowerCase()
+  );
+  let highlights = project.highlights || fallbackMatch?.highlights || [];
+  if ((!highlights || highlights.length === 0) && project.description) {
+    const sentences = project.description.split('.').map((s) => s.trim()).filter((s) => s.length > 10);
+    highlights = sentences.slice(0, 2);
+  }
 
   const handleDetailsClick = (e) => {
     if (onViewDetails) {
@@ -15,7 +28,7 @@ export const ProjectCard = ({ project, onViewDetails }) => {
   return (
     <article className="rounded-2xl bg-white dark:bg-gradient-to-b dark:from-[#0F1626]/90 dark:to-[#0A0E18]/90 border border-slate-200 dark:border-slate-800/90 hover:border-blue-500/50 dark:hover:border-blue-500/40 transition-all duration-300 overflow-hidden shadow-lg shadow-slate-900/5 dark:shadow-xl dark:shadow-black/40 flex flex-col justify-between group hover:-translate-y-1">
       <div>
-        {/* Preview Image Container */}
+        {/* Preview Image Container - clean hover without obstructing overlay */}
         <div className="relative aspect-[16/10] bg-slate-100 dark:bg-slate-950 overflow-hidden border-b border-slate-200 dark:border-slate-800/80">
           {!imageError && project.image ? (
             <img
@@ -40,14 +53,6 @@ export const ProjectCard = ({ project, onViewDetails }) => {
               Featured
             </div>
           )}
-
-          {/* Quick Details Hover Overlay */}
-          <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
-            <span className="px-3.5 py-1.5 rounded-xl bg-blue-600/95 backdrop-blur-md text-white text-xs font-mono font-bold flex items-center gap-1.5 shadow-lg">
-              <Eye className="w-3.5 h-3.5" />
-              <span>View Details</span>
-            </span>
-          </div>
         </div>
 
         {/* Content Body */}
@@ -71,12 +76,29 @@ export const ProjectCard = ({ project, onViewDetails }) => {
             )}
           </h3>
 
-          <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-5 line-clamp-3">
+          <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-4 line-clamp-3">
             {project.description}
           </p>
 
+          {/* Brief View Details & Highlights Section */}
+          {highlights && highlights.length > 0 && (
+            <div className="mb-4 pt-3 border-t border-slate-100 dark:border-slate-800/80">
+              <p className="text-[10px] font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2 font-semibold">
+                Brief Specifications &amp; Scope:
+              </p>
+              <ul className="space-y-1.5">
+                {highlights.slice(0, 2).map((item, idx) => (
+                  <li key={idx} className="flex items-start gap-2 text-xs text-slate-700 dark:text-slate-300 leading-snug">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 dark:text-emerald-400 shrink-0 mt-0.5" />
+                    <span className="line-clamp-1">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
           {/* Technologies tags */}
-          <div className="flex flex-wrap gap-1.5 mb-6">
+          <div className="flex flex-wrap gap-1.5 pt-2">
             {(project.technologies || project.tags || []).map((tech) => (
               <span
                 key={tech}

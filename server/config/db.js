@@ -1,5 +1,7 @@
 import mongoose from 'mongoose';
 
+mongoose.set('bufferCommands', false); // Fail fast, don't hang
+
 let isConnected = false;
 
 export const connectDB = async () => {

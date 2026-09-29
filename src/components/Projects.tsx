@@ -51,26 +51,6 @@ export const Projects: React.FC = () => {
                       <p className="text-xs text-slate-400 max-w-sm">{project.description}</p>
                     </div>
                   )}
-
-                  {/* Hover Quick View Overlay */}
-                  <div className="absolute inset-0 bg-slate-950/60 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center gap-3 p-4">
-                    <button
-                      onClick={() => setSelectedProject(project)}
-                      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-slate-900/90 hover:bg-slate-800 text-xs font-semibold uppercase tracking-wider text-white border border-slate-700 shadow-lg transition-colors"
-                    >
-                      <Eye className="w-3.5 h-3.5 text-blue-400" />
-                      <span>Quick View</span>
-                    </button>
-                    <a
-                      href={project.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-xs font-semibold uppercase tracking-wider text-white shadow-lg transition-colors"
-                    >
-                      <span>Visit Website</span>
-                      <ExternalLink className="w-3.5 h-3.5" />
-                    </a>
-                  </div>
                 </div>
 
                 {/* Project Description & Details */}

@@ -8,6 +8,20 @@ export const errorHandler = (err, req, res, next) => {
   let statusCode = res.statusCode === 200 ? 500 : res.statusCode;
   let message = err.message || 'Internal Server Error';
 
+  // Handle Database Offline / Mongoose Network Error
+  if (
+    err.name === 'MongooseError' ||
+    err.name === 'MongoNetworkError' ||
+    err.name === 'MongoServerSelectionError' ||
+    (err.message && err.message.includes('buffering timed out'))
+  ) {
+    console.warn('[AI Studio] Database offline or query timeout — handling gracefully');
+    if (req.method === 'GET') {
+      return res.json(req.path.endsWith('s') || req.path.endsWith('s/') ? [] : {});
+    }
+    return res.status(503).json({ success: false, error: 'Database service temporarily unavailable' });
+  }
+
   // Handle Mongoose Bad ObjectId (CastError)
   if (err.name === 'CastError' && err.kind === 'ObjectId') {
     statusCode = 404;

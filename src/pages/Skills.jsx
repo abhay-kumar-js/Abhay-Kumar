@@ -57,19 +57,19 @@ export const Skills = () => {
     <div className="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-24 py-12 sm:py-16 space-y-12">
       {/* Header */}
       <div className="max-w-5xl">
-        <p className="text-xs uppercase tracking-widest font-semibold text-blue-400 mb-2 font-mono">
+        <p className="text-xs uppercase tracking-widest font-semibold text-blue-600 dark:text-blue-400 mb-2 font-mono">
           Engineering Stack
         </p>
-        <h1 className="text-3xl sm:text-5xl font-bold font-display tracking-tight text-white mb-4">
+        <h1 className="text-3xl sm:text-5xl font-bold font-display tracking-tight text-slate-900 dark:text-white mb-4">
           Technical Skills
         </h1>
-        <p className="text-base sm:text-lg text-slate-300 leading-relaxed">
+        <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
           A battle-tested technology stack spanning full-stack web engineering, e-commerce engines, design, and search optimization.
         </p>
       </div>
 
       {/* Filter Tabs */}
-      <div className="flex flex-wrap items-center gap-2 p-1.5 rounded-xl bg-slate-900/90 border border-slate-800/80 max-w-2xl">
+      <div className="flex flex-wrap items-center gap-2 p-1.5 rounded-xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800/80 max-w-2xl shadow-sm">
         {categories.map((cat) => (
           <button
             key={cat}
@@ -77,7 +77,7 @@ export const Skills = () => {
             className={`px-3.5 py-1.5 text-xs font-semibold rounded-lg transition-colors cursor-pointer ${
               activeFilter === cat
                 ? 'bg-blue-600 text-white shadow-sm'
-                : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/50'
             }`}
           >
             {cat}
@@ -92,24 +92,24 @@ export const Skills = () => {
           return (
             <div
               key={group.category}
-              className="p-7 rounded-2xl bg-gradient-to-b from-[#0F172A]/90 to-[#0A0F1D]/90 border border-slate-800 hover:border-slate-700 transition-all flex flex-col justify-between"
+              className="p-7 rounded-2xl bg-white dark:bg-gradient-to-b dark:from-[#0F172A]/90 dark:to-[#0A0F1D]/90 border border-slate-200 dark:border-slate-800 hover:border-blue-500/40 dark:hover:border-slate-700 transition-all flex flex-col justify-between shadow-sm"
             >
               <div>
-                <div className="flex items-center gap-3 mb-4 pb-3 border-b border-slate-800">
-                  <div className="p-2.5 rounded-xl bg-slate-800/80 border border-slate-700/60 text-blue-400">
+                <div className="flex items-center gap-3 mb-4 pb-3 border-b border-slate-100 dark:border-slate-800">
+                  <div className="p-2.5 rounded-xl bg-blue-50 dark:bg-slate-800/80 border border-blue-100 dark:border-slate-700/60 text-blue-600 dark:text-blue-400">
                     <Icon className="w-5 h-5" />
                   </div>
                   <div>
-                    <h2 className="text-lg font-bold font-display text-white">
+                    <h2 className="text-lg font-bold font-display text-slate-900 dark:text-white">
                       {group.category}
                     </h2>
-                    <span className="text-[11px] font-mono text-slate-400">
+                    <span className="text-[11px] font-mono text-slate-500 dark:text-slate-400">
                       {group.skills.length} core competencies
                     </span>
                   </div>
                 </div>
 
-                <p className="text-xs text-slate-400 mb-6 leading-relaxed">
+                <p className="text-xs text-slate-600 dark:text-slate-400 mb-6 leading-relaxed">
                   {group.description}
                 </p>
 
@@ -118,7 +118,7 @@ export const Skills = () => {
                   {group.skills.map((skill) => (
                     <span
                       key={skill}
-                      className="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-xs font-mono text-slate-200 hover:border-blue-500/40 hover:text-white transition-colors"
+                      className="px-3 py-1.5 rounded-lg bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs font-mono text-slate-700 dark:text-slate-200 hover:border-blue-500/40 hover:text-blue-600 dark:hover:text-white transition-colors"
                     >
                       {skill}
                     </span>
@@ -126,9 +126,9 @@ export const Skills = () => {
                 </div>
               </div>
 
-              <div className="mt-8 pt-3 border-t border-slate-800/60 flex items-center justify-between text-[11px] font-mono text-slate-400">
+              <div className="mt-8 pt-3 border-t border-slate-100 dark:border-slate-800/60 flex items-center justify-between text-[11px] font-mono text-slate-500 dark:text-slate-400">
                 <span>Production Standard</span>
-                <span className="text-emerald-400">Active Daily</span>
+                <span className="text-emerald-600 dark:text-emerald-400 font-semibold">Active Daily</span>
               </div>
             </div>
           );
