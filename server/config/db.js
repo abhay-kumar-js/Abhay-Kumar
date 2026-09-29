@@ -10,6 +10,15 @@ export const connectDB = async () => {
     return false;
   }
 
+  // Detect unreplaced placeholder like <db_username> or <password>
+  if (uri.includes('<db_username>') || uri.includes('<password>') || /<[^>]+>/.test(uri)) {
+    console.warn(
+      '⚠️ MONGODB_URI contains unreplaced placeholder like <db_username>. Please replace <db_username> with your Atlas database username.'
+    );
+    console.log('Falling back to local persistent store for uninterrupted operation.');
+    return false;
+  }
+
   if (isConnected) {
     return true;
   }
@@ -17,6 +26,7 @@ export const connectDB = async () => {
   try {
     const conn = await mongoose.connect(uri, {
       bufferCommands: false,
+      dbName: 'abhay_portfolio', // Ensures documents are stored in abhay_portfolio collection
     });
     isConnected = !!conn.connections[0].readyState;
     console.log(`✅ MongoDB Atlas Connected: ${conn.connection.host}`);

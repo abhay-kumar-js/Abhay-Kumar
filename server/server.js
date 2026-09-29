@@ -10,6 +10,7 @@ import projectRoutes from './routes/projectRoutes.js';
 import serviceRoutes from './routes/serviceRoutes.js';
 import contactRoutes from './routes/contactRoutes.js';
 import settingsRoutes from './routes/settingsRoutes.js';
+import githubRoutes from './routes/githubRoutes.js';
 import { errorHandler, notFound } from './middleware/errorMiddleware.js';
 
 dotenv.config();
@@ -21,14 +22,22 @@ export const createApp = async () => {
 
   const app = express();
 
-  // Security Middleware
+  // Security Middleware (Configured safely for AI Studio preview iframe and API security)
   app.use(
     helmet({
       contentSecurityPolicy: false,
       crossOriginEmbedderPolicy: false,
       crossOriginResourcePolicy: false,
+      crossOriginOpenerPolicy: false,
+      frameguard: false,
     })
   );
+
+  // Ensure iframe embedding in AI Studio preview is never blocked
+  app.use((req, res, next) => {
+    res.removeHeader('X-Frame-Options');
+    next();
+  });
 
   // CORS configuration
   const allowedOrigins = [
@@ -72,6 +81,7 @@ export const createApp = async () => {
   app.use('/api/services', serviceRoutes);
   app.use('/api/contact', contactRoutes);
   app.use('/api/settings', settingsRoutes);
+  app.use('/api/github', githubRoutes);
 
   return app;
 };

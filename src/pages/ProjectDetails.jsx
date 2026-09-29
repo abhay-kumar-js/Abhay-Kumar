@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, ExternalLink, Globe, CheckCircle2, Code2 } from 'lucide-react';
 import { api } from '../services/api.js';
+import { PROJECTS } from '../data/portfolioData.ts';
 import Loader from '../components/Loader.jsx';
 
 export const ProjectDetails = () => {
@@ -18,14 +19,30 @@ export const ProjectDetails = () => {
         if (res.data) {
           setProject(res.data);
           document.title = `${res.data.title} | Projects | Abhay Kumar`;
-        } else {
-          setError('Project not found');
+          return;
         }
       } catch (err) {
-        setError(err.message || 'Failed to load project details');
-      } finally {
-        setLoading(false);
+        console.warn('API lookup failed, checking static projects fallback:', err.message);
       }
+
+      // Fallback to static PROJECTS data
+      const fallback = PROJECTS.find((p) => p.id === slug);
+      if (fallback) {
+        setProject({
+          title: fallback.name,
+          slug: fallback.id,
+          description: fallback.description,
+          category: fallback.category,
+          image: fallback.image,
+          url: fallback.url,
+          technologies: fallback.tags,
+          highlights: fallback.highlights,
+        });
+        document.title = `${fallback.name} | Projects | Abhay Kumar`;
+      } else {
+        setError('Project not found');
+      }
+      setLoading(false);
     };
 
     fetchProject();
@@ -58,7 +75,7 @@ export const ProjectDetails = () => {
   }
 
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 space-y-10">
+    <div className="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-24 py-10 sm:py-16 space-y-10">
       {/* Back button */}
       <div>
         <Link

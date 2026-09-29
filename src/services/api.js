@@ -120,6 +120,12 @@ export const api = {
         body: JSON.stringify(data),
       }),
   },
+
+  // GitHub Activity & Contribution Graph
+  github: {
+    getActivity: (username = 'abhay-kumar-js') =>
+      request(`/github?username=${encodeURIComponent(username)}`),
+  },
 };
 
 export default api;

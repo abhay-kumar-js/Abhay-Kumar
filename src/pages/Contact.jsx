@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { Send, CheckCircle2, AlertCircle, ArrowRight, Clock, Shield } from 'lucide-react';
+import { Send, CheckCircle2, AlertCircle, ArrowRight, Clock, Shield, Mail, Phone, MessageSquare } from 'lucide-react';
 import { api } from '../services/api.js';
 
 export const Contact = () => {
@@ -84,7 +84,7 @@ export const Contact = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 space-y-12">
+    <div className="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-24 py-12 sm:py-16 space-y-12">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
         {/* Left Column: Heading & Context */}
         <div className="lg:col-span-5 space-y-8">
@@ -116,6 +116,41 @@ export const Contact = () => {
               <span>Location: India</span>
               <span className="text-blue-400">Direct Inquiries</span>
             </div>
+          </div>
+
+          {/* Direct Reach-Out Cards */}
+          <div className="space-y-3">
+            <a
+              href="mailto:algoaxisoftech@gmail.com"
+              className="flex items-center gap-3.5 p-4 rounded-xl bg-slate-900/80 border border-slate-800 hover:border-blue-500/50 hover:bg-slate-800/60 transition-all group"
+            >
+              <div className="w-10 h-10 rounded-lg bg-blue-600/10 border border-blue-500/20 text-blue-400 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                <Mail className="w-5 h-5" />
+              </div>
+              <div className="min-w-0 flex-1">
+                <p className="text-[11px] font-mono text-slate-400 uppercase tracking-wider">Email Address</p>
+                <p className="text-sm font-semibold text-white group-hover:text-blue-400 transition-colors truncate">
+                  algoaxisoftech@gmail.com
+                </p>
+              </div>
+              <ArrowRight className="w-4 h-4 text-slate-500 group-hover:text-blue-400 group-hover:translate-x-1 transition-all shrink-0" />
+            </a>
+
+            <a
+              href="tel:+917379289932"
+              className="flex items-center gap-3.5 p-4 rounded-xl bg-slate-900/80 border border-slate-800 hover:border-emerald-500/50 hover:bg-slate-800/60 transition-all group"
+            >
+              <div className="w-10 h-10 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                <Phone className="w-5 h-5" />
+              </div>
+              <div className="min-w-0 flex-1">
+                <p className="text-[11px] font-mono text-slate-400 uppercase tracking-wider">Phone / WhatsApp</p>
+                <p className="text-sm font-semibold text-white group-hover:text-emerald-400 transition-colors">
+                  +91-7379289932
+                </p>
+              </div>
+              <ArrowRight className="w-4 h-4 text-slate-500 group-hover:text-emerald-400 group-hover:translate-x-1 transition-all shrink-0" />
+            </a>
           </div>
 
           <div className="space-y-3 text-xs text-slate-400 font-mono">

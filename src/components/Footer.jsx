@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowUp, Lock } from 'lucide-react';
+import { ArrowUp, Lock, GitBranch } from 'lucide-react';
 
 export const Footer = () => {
   const navLinks = [
@@ -19,7 +19,7 @@ export const Footer = () => {
 
   return (
     <footer className="py-12 border-t border-slate-800 bg-[#06080D] relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-24">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-slate-800/80">
           {/* Brand & Subtitle */}
           <div className="text-center md:text-left">
@@ -29,6 +29,25 @@ export const Footer = () => {
             <p className="text-xs sm:text-sm text-slate-400 font-mono mt-1">
               Web Developer • MERN Stack • Shopify • WordPress • SEO
             </p>
+            <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 mt-2 text-xs font-mono text-slate-400">
+              <a href="mailto:algoaxisoftech@gmail.com" className="text-blue-400 hover:text-blue-300 transition-colors underline decoration-blue-500/40">
+                algoaxisoftech@gmail.com
+              </a>
+              <span className="text-slate-600">·</span>
+              <a href="tel:+917379289932" className="text-emerald-400 hover:text-emerald-300 transition-colors">
+                +91-7379289932
+              </a>
+              <span className="text-slate-600">·</span>
+              <a
+                href="https://github.com/abhay-kumar-js"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-slate-300 hover:text-white transition-colors inline-flex items-center gap-1.5 hover:underline"
+              >
+                <GitBranch className="w-3.5 h-3.5 text-blue-400" />
+                <span>github.com/abhay-kumar-js</span>
+              </a>
+            </div>
           </div>
 
           {/* Navigation Links */}

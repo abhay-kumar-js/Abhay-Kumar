@@ -54,9 +54,9 @@ export const Skills = () => {
       : skillGroups.filter((g) => g.category === activeFilter);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 space-y-12">
+    <div className="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-24 py-12 sm:py-16 space-y-12">
       {/* Header */}
-      <div className="max-w-3xl">
+      <div className="max-w-5xl">
         <p className="text-xs uppercase tracking-widest font-semibold text-blue-400 mb-2 font-mono">
           Engineering Stack
         </p>
