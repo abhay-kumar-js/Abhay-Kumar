@@ -3,7 +3,7 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --font-display: "Syne", sans-serif;
+  --font-display: "Archivo Black", sans-serif;
   --font-sans: "Plus Jakarta Sans", sans-serif;
   --font-mono: "JetBrains Mono", monospace;
 }
@@ -18,7 +18,7 @@
 }
 
 h1, h2, h3, .font-display {
-  font-family: "Syne", sans-serif;
+  font-family: "Archivo Black", sans-serif;
 }
 
 code, kbd, samp, pre, .font-mono {

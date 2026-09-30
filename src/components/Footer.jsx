@@ -256,12 +256,14 @@ export const Footer = () => {
 
                   <div className="pt-2">
                     <a
-                      href="/assets/Abhay_Kumar_Resume.pdf"
-                      download="Abhay_Kumar_Resume.pdf"
+                      href="/assets/Abhay_Kumar_Web-Dev-CV.pdf"
+                      download="Abhay_Kumar_Web-Dev-CV.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="w-full inline-flex items-center justify-center gap-2 px-3.5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-mono font-semibold transition-all shadow-md shadow-blue-600/20"
                     >
                       <Download className="w-3.5 h-3.5" />
-                      <span>Resume (PDF)</span>
+                      <span>CV (PDF)</span>
                     </a>
                   </div>
                 </motion.div>

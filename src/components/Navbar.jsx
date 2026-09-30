@@ -97,13 +97,15 @@ export const Navbar = () => {
 
             {/* Resume Download CTA */}
             <a
-              href="/assets/Abhay_Kumar_Resume.pdf"
-              download="Abhay_Kumar_Resume.pdf"
+              href="/assets/Abhay_Kumar_Web-Dev-CV.pdf"
+              download="Abhay_Kumar_Web-Dev-CV.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               className="hidden xl:inline-flex items-center gap-1.5 px-3 py-2 text-xs font-mono text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg hover:border-slate-300 dark:hover:border-slate-700 transition-colors"
-              title="Download Abhay Kumar's Resume (PDF)"
+              title="Download Abhay Kumar's CV (PDF)"
             >
               <Download className="w-3.5 h-3.5 text-blue-500 dark:text-blue-400" />
-              <span>Resume</span>
+              <span>CV (PDF)</span>
             </a>
 
             {/* Let's Work Together CTA */}
@@ -166,13 +168,15 @@ export const Navbar = () => {
               </NavLink>
             )}
             <a
-              href="/assets/Abhay_Kumar_Resume.pdf"
-              download="Abhay_Kumar_Resume.pdf"
+              href="/assets/Abhay_Kumar_Web-Dev-CV.pdf"
+              download="Abhay_Kumar_Web-Dev-CV.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               className="px-4 py-2.5 text-sm font-semibold rounded-xl text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-slate-800/60 transition-all flex items-center justify-between border border-blue-200 dark:border-blue-500/20 bg-blue-50/50 dark:bg-blue-950/20"
             >
               <span className="flex items-center gap-2">
                 <Download className="w-4 h-4" />
-                <span>Download Resume</span>
+                <span>Download CV</span>
               </span>
               <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-blue-100 dark:bg-blue-900/60 text-blue-700 dark:text-blue-300">
                 PDF

@@ -97,13 +97,15 @@ export const Experience = () => {
         {/* Download Resume Actions */}
         <div className="flex flex-wrap items-center gap-3">
           <a
-            href="/assets/Abhay_Kumar_Resume.pdf"
-            download="Abhay_Kumar_Resume.pdf"
+            href="/assets/Abhay_Kumar_Web-Dev-CV.pdf"
+            download="Abhay_Kumar_Web-Dev-CV.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-mono font-bold transition-all shadow-lg shadow-blue-600/30 hover:-translate-y-0.5"
-            title="Download Abhay Kumar's Resume"
+            title="Download Abhay Kumar's CV (PDF)"
           >
             <Download className="w-4 h-4" />
-            <span>Download Official Resume (PDF)</span>
+            <span>Download Official CV (PDF)</span>
           </a>
 
           <button
@@ -240,12 +242,14 @@ export const Experience = () => {
 
         <div className="flex items-center gap-3">
           <a
-            href="/assets/Abhay_Kumar_Resume.pdf"
-            download="Abhay_Kumar_Resume.pdf"
+            href="/assets/Abhay_Kumar_Web-Dev-CV.pdf"
+            download="Abhay_Kumar_Web-Dev-CV.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 hover:border-slate-400 dark:hover:border-slate-600 text-slate-800 dark:text-white text-xs font-mono font-semibold transition-all shadow-sm"
           >
             <Download className="w-4 h-4 text-blue-500 dark:text-blue-400" />
-            <span>Download Resume</span>
+            <span>Download CV</span>
           </a>
           <Link
             to="/contact"

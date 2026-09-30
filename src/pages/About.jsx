@@ -118,13 +118,15 @@ export const About = () => {
             </Link>
 
             <a
-              href="/assets/Abhay_Kumar_Resume.pdf"
-              download="Abhay_Kumar_Resume.pdf"
+              href="/assets/Abhay_Kumar_Web-Dev-CV.pdf"
+              download="Abhay_Kumar_Web-Dev-CV.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-slate-800 dark:text-slate-200 hover:text-blue-600 dark:hover:text-white bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 hover:border-slate-400 dark:hover:border-slate-600 rounded-lg transition-all shadow-sm"
-              title="Download Abhay Kumar's Resume (PDF)"
+              title="Download Abhay Kumar's CV (PDF)"
             >
               <Download className="w-3.5 h-3.5 text-blue-500 dark:text-blue-400" />
-              <span>Download Resume (PDF)</span>
+              <span>Download CV (PDF)</span>
             </a>
 
             <Link

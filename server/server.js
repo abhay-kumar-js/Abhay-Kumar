@@ -1,4 +1,6 @@
 import express from 'express';
+import fs from 'fs';
+import path from 'path';
 import cors from 'cors';
 import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
@@ -22,7 +24,7 @@ export const createApp = async () => {
 
   const app = express();
 
-  // Security Middleware (Configured safely for AI Studio preview iframe and API security)
+  // Security Middleware (Configured safely for AI Studio preview iframe, PDF downloads, and API security)
   app.use(
     helmet({
       contentSecurityPolicy: false,
@@ -30,8 +32,33 @@ export const createApp = async () => {
       crossOriginResourcePolicy: false,
       crossOriginOpenerPolicy: false,
       frameguard: false,
+      ieNoOpen: false, // Ensure downloaded PDF files can be directly opened in browser and PDF readers
     })
   );
+
+  // Dedicated endpoint for serving the authentic CV PDF with full binary integrity and correct headers
+  app.get(['/assets/Abhay_Kumar_Web-Dev-CV.pdf', '/api/download-cv'], (req, res) => {
+    const candidatePaths = [
+      path.resolve(process.cwd(), 'public/assets/Abhay_Kumar_Web-Dev-CV.pdf'),
+      path.resolve(process.cwd(), 'dist/assets/Abhay_Kumar_Web-Dev-CV.pdf'),
+    ];
+    const filePath = candidatePaths.find((p) => fs.existsSync(p));
+    if (!filePath) {
+      return res.status(404).send('CV PDF not found');
+    }
+
+    const stat = fs.statSync(filePath);
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Length', stat.size);
+    res.setHeader('Accept-Ranges', 'bytes');
+    if (req.query.view === '1' || req.query.view === 'inline') {
+      res.setHeader('Content-Disposition', 'inline; filename="Abhay_Kumar_Web-Dev-CV.pdf"');
+    } else {
+      res.setHeader('Content-Disposition', 'attachment; filename="Abhay_Kumar_Web-Dev-CV.pdf"');
+    }
+    res.setHeader('Cache-Control', 'public, max-age=86400');
+    return res.sendFile(filePath);
+  });
 
   // Ensure iframe embedding in AI Studio preview is never blocked
   app.use((req, res, next) => {

@@ -146,7 +146,7 @@ export const GitHubActivitySection = () => {
                 </div>
 
                 <span className="px-2 py-0.5 rounded text-[10px] font-mono text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800/40 font-semibold">
-                  Verified Dev
+                  Developer
                 </span>
               </div>
 

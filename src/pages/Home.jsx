@@ -142,13 +142,15 @@ export const Home = () => {
                 </Link>
 
                 <a
-                  href="/assets/Abhay_Kumar_Resume.pdf"
-                  download="Abhay_Kumar_Resume.pdf"
+                  href="/assets/Abhay_Kumar_Web-Dev-CV.pdf"
+                  download="Abhay_Kumar_Web-Dev-CV.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3.5 text-xs font-bold uppercase tracking-wider text-slate-800 dark:text-slate-200 bg-white hover:bg-slate-100 dark:bg-slate-900/90 dark:hover:bg-slate-800 hover:text-blue-600 dark:hover:text-white border border-slate-300 dark:border-slate-700/80 rounded-xl transition-all hover:-translate-y-0.5 shadow-sm"
-                  title="Download Abhay Kumar's Official Resume"
+                  title="Download Abhay Kumar's Official CV (PDF)"
                 >
                   <Download className="w-4 h-4 text-blue-500 dark:text-blue-400" />
-                  <span>Download Resume</span>
+                  <span>Download CV</span>
                 </a>
 
                 <Link
