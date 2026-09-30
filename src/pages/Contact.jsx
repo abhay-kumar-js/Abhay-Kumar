@@ -32,6 +32,7 @@ export const Contact = () => {
   const [status, setStatus] = useState('idle'); // 'idle' | 'sending' | 'success' | 'error'
   const [errorMessage, setErrorMessage] = useState('');
   const [formErrors, setFormErrors] = useState({});
+  const [submitResult, setSubmitResult] = useState(null);
 
   const serviceOptions = [
     'MERN Stack Development',
@@ -67,16 +68,17 @@ export const Contact = () => {
 
     try {
       const res = await api.contact.sendMessage(formData);
-      if (res.success) {
+      if (res && res.success) {
+        setSubmitResult(res);
         setStatus('success');
       } else {
         setStatus('error');
-        setErrorMessage(res.message || 'Failed to submit message');
+        setErrorMessage(res?.message || 'Failed to submit message');
       }
     } catch (err) {
       console.error('Contact submission error:', err);
-      // Even if network or API drops, record smoothly in local UI
-      setStatus('success');
+      setStatus('error');
+      setErrorMessage(err.message || 'Unable to connect to the server. Please try again.');
     }
   };
 
@@ -88,6 +90,7 @@ export const Contact = () => {
       service: 'MERN Stack Development',
       message: '',
     });
+    setSubmitResult(null);
     setStatus('idle');
     setErrorMessage('');
     setFormErrors({});
@@ -190,6 +193,10 @@ export const Contact = () => {
                 <h2 className="text-2xl font-bold font-display text-slate-900 dark:text-white">
                   Message sent successfully.
                 </h2>
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-mono font-medium bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                  <span>Destination: {submitResult?.destination || 'MongoDB Atlas'}</span>
+                </div>
                 <p className="text-sm text-slate-600 dark:text-slate-300 max-w-md mx-auto leading-relaxed">
                   Thank you, <strong className="text-slate-900 dark:text-white">{formData.name}</strong>. Your inquiry for <strong className="text-blue-600 dark:text-blue-400">{formData.service}</strong> has been logged in the portfolio system. Abhay will review your requirements and reach out via <strong className="text-slate-900 dark:text-white">{formData.email}</strong>.
                 </p>

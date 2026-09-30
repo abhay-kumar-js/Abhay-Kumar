@@ -23,6 +23,7 @@ export const createApp = async () => {
   await initAdminUser();
 
   const app = express();
+  app.set('trust proxy', 1);
 
   // Security Middleware (Configured safely for AI Studio preview iframe, PDF downloads, and API security)
   app.use(

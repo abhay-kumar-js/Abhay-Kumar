@@ -115,4 +115,4 @@ export const connectDB = async () => {
   }
 };
 
-export const getIsConnected = () => isConnected;
+export const getIsConnected = () => mongoose.connection.readyState === 1;

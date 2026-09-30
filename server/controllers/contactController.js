@@ -23,10 +23,10 @@ export const submitMessage = async (req, res, next) => {
       });
     }
 
-    if (message.trim().length < 10) {
+    if (!message || message.trim().length === 0) {
       return res.status(400).json({
         success: false,
-        message: 'Message must be at least 10 characters long',
+        message: 'Please provide your message details',
       });
     }
 
