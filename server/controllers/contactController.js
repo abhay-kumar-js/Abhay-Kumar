@@ -1,4 +1,5 @@
 import { DataStore } from '../utils/dataStore.js';
+import { getIsConnected } from '../config/db.js';
 
 // @desc    Submit a contact inquiry
 // @route   POST /api/contact
@@ -37,11 +38,18 @@ export const submitMessage = async (req, res, next) => {
       message: message.trim(),
     };
 
+    const isDb = getIsConnected();
     const savedMessage = await DataStore.createMessage(messageData);
+    console.log(
+      `📩 New Contact Message received from ${messageData.name} <${messageData.email}> [Stored in: ${
+        isDb ? 'MongoDB Atlas' : 'Local In-Memory Store'
+      }]`
+    );
 
     return res.status(201).json({
       success: true,
       message: 'Message sent successfully. Thank you for getting in touch!',
+      destination: isDb ? 'MongoDB Atlas' : 'Local In-Memory Store',
       data: savedMessage,
     });
   } catch (error) {

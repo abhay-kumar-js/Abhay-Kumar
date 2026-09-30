@@ -126,6 +126,9 @@ export const api = {
     getActivity: (username = 'abhay-kumar-js') =>
       request(`/github?username=${encodeURIComponent(username)}`),
   },
+
+  // Health and System Diagnostics
+  health: () => request('/health'),
 };
 
 export default api;

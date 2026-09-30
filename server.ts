@@ -2,6 +2,10 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import express from 'express';
+import dotenv from 'dotenv';
+
+dotenv.config({ override: true });
+
 import { createApp } from './server/server.js';
 
 const __filename = fileURLToPath(import.meta.url);

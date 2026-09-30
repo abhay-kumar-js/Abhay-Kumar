@@ -5,7 +5,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
-import { connectDB } from './config/db.js';
+import { connectDB, getIsConnected } from './config/db.js';
 import { initAdminUser } from './utils/dataStore.js';
 import authRoutes from './routes/authRoutes.js';
 import projectRoutes from './routes/projectRoutes.js';
@@ -15,7 +15,7 @@ import settingsRoutes from './routes/settingsRoutes.js';
 import githubRoutes from './routes/githubRoutes.js';
 import { errorHandler, notFound } from './middleware/errorMiddleware.js';
 
-dotenv.config();
+dotenv.config({ override: true });
 
 export const createApp = async () => {
   // Connect to MongoDB Atlas (if MONGODB_URI set) or initialize in-memory store
@@ -93,11 +93,16 @@ export const createApp = async () => {
   app.use(express.urlencoded({ extended: true, limit: '10mb' }));
   app.use(cookieParser());
 
-  // Health check endpoint
+  // Health check endpoint with database connection status
   app.get('/api/health', (req, res) => {
     res.json({
       status: 'ok',
       service: 'Abhay Kumar Portfolio API',
+      database: {
+        connected: getIsConnected(),
+        type: getIsConnected() ? 'MongoDB Atlas' : 'Local In-Memory Store',
+        dbName: 'abhay_portfolio',
+      },
       timestamp: new Date().toISOString(),
     });
   });
