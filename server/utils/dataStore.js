@@ -1,5 +1,5 @@
 import bcrypt from 'bcryptjs';
-import { getIsConnected } from '../config/db.js';
+import { connectDB, getIsConnected } from '../config/db.js';
 import User from '../models/User.js';
 import Project from '../models/Project.js';
 import Service from '../models/Service.js';
@@ -287,9 +287,20 @@ let localSettings = {
 };
 
 // Initialize default admin user in local store
+const ensureConnected = async () => {
+  if (!getIsConnected()) {
+    await connectDB();
+  }
+  return getIsConnected();
+};
+
 export const initAdminUser = async () => {
   const adminEmail = (process.env.ADMIN_EMAIL || 'admin@abhaykumar.dev').toLowerCase();
-  const adminPassword = process.env.ADMIN_PASSWORD || 'Admin@12345';
+  const rawAdminPassword = process.env.ADMIN_PASSWORD || 'Admin@12345';
+  let adminPassword = rawAdminPassword;
+  try {
+    adminPassword = decodeURIComponent(rawAdminPassword);
+  } catch (_) {}
   const adminName = process.env.ADMIN_NAME || 'Abhay Kumar';
 
   const salt = await bcrypt.genSalt(10);
@@ -306,10 +317,12 @@ export const initAdminUser = async () => {
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     });
+  } else {
+    existing.password = hashedPassword;
   }
 
-  // If MongoDB is connected, also seed Mongoose database
-  if (getIsConnected()) {
+  // If MongoDB is connected, also seed Mongoose database in isolated blocks
+  if (await ensureConnected()) {
     try {
       const userExists = await User.findOne({ email: adminEmail });
       if (!userExists) {
@@ -321,7 +334,11 @@ export const initAdminUser = async () => {
         });
         console.log(`✅ Admin user created in MongoDB Atlas: ${adminEmail}`);
       }
+    } catch (err) {
+      console.warn('Admin user seed warning:', err.message);
+    }
 
+    try {
       const projectCount = await Project.countDocuments();
       if (projectCount === 0) {
         await Project.insertMany(
@@ -332,7 +349,11 @@ export const initAdminUser = async () => {
         );
         console.log('✅ Seeded initial projects to MongoDB Atlas');
       }
+    } catch (err) {
+      console.warn('Projects seed warning:', err.message);
+    }
 
+    try {
       const serviceCount = await Service.countDocuments();
       if (serviceCount === 0) {
         await Service.insertMany(
@@ -343,14 +364,18 @@ export const initAdminUser = async () => {
         );
         console.log('✅ Seeded initial services to MongoDB Atlas');
       }
+    } catch (err) {
+      console.warn('Services seed warning:', err.message);
+    }
 
+    try {
       const settingsCount = await SiteSettings.countDocuments();
       if (settingsCount === 0) {
         await SiteSettings.create(localSettings);
         console.log('✅ Seeded site settings to MongoDB Atlas');
       }
     } catch (err) {
-      console.warn('Seeding warning:', err.message);
+      console.warn('Settings seed warning:', err.message);
     }
   }
 };
@@ -359,15 +384,19 @@ export const initAdminUser = async () => {
 export const DataStore = {
   // USERS
   async findUserByEmail(email) {
-    if (getIsConnected()) {
-      return await User.findOne({ email: email.toLowerCase() });
+    if (await ensureConnected()) {
+      const dbUser = await User.findOne({ email: email.toLowerCase() });
+      if (dbUser) return dbUser;
     }
     return localUsers.find((u) => u.email === email.toLowerCase());
   },
 
   async findUserById(id) {
-    if (getIsConnected()) {
-      return await User.findById(id).select('-password');
+    if (await ensureConnected()) {
+      try {
+        const dbUser = await User.findById(id).select('-password');
+        if (dbUser) return dbUser;
+      } catch (_) {}
     }
     const u = localUsers.find((user) => user._id === id);
     if (!u) return null;
@@ -377,21 +406,23 @@ export const DataStore = {
 
   // PROJECTS
   async getProjects() {
-    if (getIsConnected()) {
-      return await Project.find().sort({ order: 1, createdAt: -1 });
+    if (await ensureConnected()) {
+      const projects = await Project.find().sort({ order: 1, createdAt: -1 });
+      if (projects.length > 0) return projects;
     }
     return [...localProjects].sort((a, b) => (a.order || 0) - (b.order || 0));
   },
 
   async getProjectBySlug(slug) {
-    if (getIsConnected()) {
-      return await Project.findOne({ slug: slug.toLowerCase() });
+    if (await ensureConnected()) {
+      const proj = await Project.findOne({ slug: slug.toLowerCase() });
+      if (proj) return proj;
     }
     return localProjects.find((p) => p.slug === slug.toLowerCase()) || null;
   },
 
   async createProject(data) {
-    if (getIsConnected()) {
+    if (await ensureConnected()) {
       return await Project.create(data);
     }
     const newProject = {
@@ -405,7 +436,7 @@ export const DataStore = {
   },
 
   async updateProject(id, data) {
-    if (getIsConnected()) {
+    if (await ensureConnected()) {
       return await Project.findByIdAndUpdate(id, data, { new: true, runValidators: true });
     }
     const index = localProjects.findIndex((p) => p._id === id || p.slug === id);
@@ -419,7 +450,7 @@ export const DataStore = {
   },
 
   async deleteProject(id) {
-    if (getIsConnected()) {
+    if (await ensureConnected()) {
       return await Project.findByIdAndDelete(id);
     }
     const index = localProjects.findIndex((p) => p._id === id || p.slug === id);
@@ -430,14 +461,15 @@ export const DataStore = {
 
   // SERVICES
   async getServices() {
-    if (getIsConnected()) {
-      return await Service.find().sort({ order: 1 });
+    if (await ensureConnected()) {
+      const services = await Service.find().sort({ order: 1 });
+      if (services.length > 0) return services;
     }
     return [...localServices].sort((a, b) => (a.order || 0) - (b.order || 0));
   },
 
   async createService(data) {
-    if (getIsConnected()) {
+    if (await ensureConnected()) {
       return await Service.create(data);
     }
     const newService = {
@@ -451,7 +483,7 @@ export const DataStore = {
   },
 
   async updateService(id, data) {
-    if (getIsConnected()) {
+    if (await ensureConnected()) {
       return await Service.findByIdAndUpdate(id, data, { new: true, runValidators: true });
     }
     const index = localServices.findIndex((s) => s._id === id || s.slug === id);
@@ -465,7 +497,7 @@ export const DataStore = {
   },
 
   async deleteService(id) {
-    if (getIsConnected()) {
+    if (await ensureConnected()) {
       return await Service.findByIdAndDelete(id);
     }
     const index = localServices.findIndex((s) => s._id === id || s.slug === id);
@@ -476,7 +508,7 @@ export const DataStore = {
 
   // CONTACT MESSAGES
   async getMessages() {
-    if (getIsConnected()) {
+    if (await ensureConnected()) {
       return await ContactMessage.find().sort({ createdAt: -1 });
     }
     return [...localMessages].sort(
@@ -485,7 +517,7 @@ export const DataStore = {
   },
 
   async createMessage(data) {
-    if (getIsConnected()) {
+    if (await ensureConnected()) {
       return await ContactMessage.create(data);
     }
     const newMessage = {
@@ -499,7 +531,7 @@ export const DataStore = {
   },
 
   async updateMessageStatus(id, status) {
-    if (getIsConnected()) {
+    if (await ensureConnected()) {
       return await ContactMessage.findByIdAndUpdate(
         id,
         { status },
@@ -513,7 +545,7 @@ export const DataStore = {
   },
 
   async deleteMessage(id) {
-    if (getIsConnected()) {
+    if (await ensureConnected()) {
       return await ContactMessage.findByIdAndDelete(id);
     }
     const index = localMessages.findIndex((m) => m._id === id);
@@ -524,7 +556,7 @@ export const DataStore = {
 
   // SITE SETTINGS
   async getSettings() {
-    if (getIsConnected()) {
+    if (await ensureConnected()) {
       const s = await SiteSettings.findOne();
       return s || localSettings;
     }
@@ -532,7 +564,7 @@ export const DataStore = {
   },
 
   async updateSettings(data) {
-    if (getIsConnected()) {
+    if (await ensureConnected()) {
       let s = await SiteSettings.findOne();
       if (s) {
         Object.assign(s, data);

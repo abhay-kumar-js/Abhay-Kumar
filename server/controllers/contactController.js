@@ -1,5 +1,5 @@
 import { DataStore } from '../utils/dataStore.js';
-import { getIsConnected } from '../config/db.js';
+import { connectDB, getIsConnected } from '../config/db.js';
 
 // @desc    Submit a contact inquiry
 // @route   POST /api/contact
@@ -38,6 +38,9 @@ export const submitMessage = async (req, res, next) => {
       message: message.trim(),
     };
 
+    if (!getIsConnected()) {
+      await connectDB();
+    }
     const isDb = getIsConnected();
     const savedMessage = await DataStore.createMessage(messageData);
     console.log(

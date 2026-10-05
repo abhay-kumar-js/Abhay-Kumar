@@ -29,7 +29,7 @@ const projectSchema = new mongoose.Schema(
     },
     url: {
       type: String,
-      required: [true, 'Live URL is required'],
+      default: '',
       trim: true,
     },
     technologies: {

@@ -5,7 +5,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
-import { connectDB, getIsConnected } from './config/db.js';
+import { connectDB, getIsConnected, getLastDbError, loadEnvConfig } from './config/db.js';
 import { initAdminUser } from './utils/dataStore.js';
 import authRoutes from './routes/authRoutes.js';
 import projectRoutes from './routes/projectRoutes.js';
@@ -16,6 +16,7 @@ import githubRoutes from './routes/githubRoutes.js';
 import { errorHandler, notFound } from './middleware/errorMiddleware.js';
 
 dotenv.config({ override: true });
+loadEnvConfig();
 
 export const createApp = async () => {
   // Connect to MongoDB Atlas (if MONGODB_URI set) or initialize in-memory store
@@ -68,8 +69,11 @@ export const createApp = async () => {
   });
 
   // CORS configuration
+  const cleanClientUrl = process.env.CLIENT_URL ? process.env.CLIENT_URL.replace(/\/+$/, '') : '';
   const allowedOrigins = [
+    cleanClientUrl,
     process.env.CLIENT_URL,
+    'https://abhayjscoder.netlify.app',
     'http://localhost:5173',
     'http://localhost:3000',
     'http://localhost:5000',
@@ -95,14 +99,19 @@ export const createApp = async () => {
   app.use(cookieParser());
 
   // Health check endpoint with database connection status
-  app.get('/api/health', (req, res) => {
+  app.get('/api/health', async (req, res) => {
+    if (!getIsConnected()) {
+      await connectDB();
+    }
+    const connected = getIsConnected();
     res.json({
       status: 'ok',
       service: 'Abhay Kumar Portfolio API',
       database: {
-        connected: getIsConnected(),
-        type: getIsConnected() ? 'MongoDB Atlas' : 'Local In-Memory Store',
+        connected,
+        type: connected ? 'MongoDB Atlas' : 'Local In-Memory Store',
         dbName: 'abhay_portfolio',
+        ...(connected ? {} : { error: getLastDbError() }),
       },
       timestamp: new Date().toISOString(),
     });

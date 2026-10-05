@@ -25,8 +25,22 @@ export const login = async (req, res, next) => {
       });
     }
 
-    // Match password
-    const isMatch = await bcrypt.compare(password, user.password);
+    // Match password (support both raw and URI-decoded variants if special chars like %40 were used)
+    let isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      try {
+        const decoded = decodeURIComponent(password);
+        if (decoded !== password) {
+          isMatch = await bcrypt.compare(decoded, user.password);
+        }
+      } catch (_) {}
+    }
+    if (!isMatch) {
+      const encoded = encodeURIComponent(password);
+      if (encoded !== password) {
+        isMatch = await bcrypt.compare(encoded, user.password);
+      }
+    }
 
     if (!isMatch) {
       return res.status(401).json({
