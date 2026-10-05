@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import Navbar from '../components/Navbar.jsx';
 import Footer from '../components/Footer.jsx';
+import ContactPopupModal from '../components/ContactPopupModal.jsx';
 
 export const PublicLayout = () => {
   const { pathname } = useLocation();
@@ -20,6 +21,9 @@ export const PublicLayout = () => {
       <main className="flex-1 pt-20">
         <Outlet />
       </main>
+
+      {/* Delayed 3-second Contact Form Popup (hidden on /contact) */}
+      <ContactPopupModal />
 
       {/* Footer */}
       <Footer />

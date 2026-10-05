@@ -18,11 +18,13 @@ import ProjectCard from '../components/ProjectCard.jsx';
 import ProjectCategoryFilter, { matchesProjectCategory } from '../components/ProjectCategoryFilter.jsx';
 import ProjectDetailsModal from '../components/ProjectDetailsModal.jsx';
 import ServiceCard from '../components/ServiceCard.jsx';
+import ProjectTimelineSection from '../components/ProjectTimelineSection.jsx';
 import TestimonialCarousel from '../components/TestimonialCarousel.jsx';
 import GitHubActivitySection from '../components/GitHubActivitySection.jsx';
 import TechStackSection from '../components/TechStackSection.jsx';
 import FAQSection from '../components/FAQSection.jsx';
 import FeatureSection from '../components/FeatureSection/FeatureSection.jsx';
+import ShopifyPartnersSection from '../components/ShopifyPartnersSection.jsx';
 import Loader from '../components/Loader.jsx';
 
 export const Home = () => {
@@ -362,6 +364,11 @@ export const Home = () => {
         )}
       </section>
 
+      {/* PROJECT TIMELINE STEPS ROADMAP */}
+      <section className="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-24">
+        <ProjectTimelineSection />
+      </section>
+
       {/* SHOPIFY CLIENT TESTIMONIALS & SUCCESS STORIES CAROUSEL */}
       <section className="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-24">
         <TestimonialCarousel />
@@ -396,6 +403,11 @@ export const Home = () => {
             ))}
           </div>
         )}
+      </section>
+
+      {/* SHOPIFY STORE SERVICES & PARTNER INTEGRATIONS */}
+      <section className="max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-24">
+        <ShopifyPartnersSection />
       </section>
 
       {/* GITHUB CONTRIBUTION GRAPH & ONGOING ACTIVITY SECTION */}

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { api } from '../services/api.js';
 import ServiceCard from '../components/ServiceCard.jsx';
+import ShopifyPartnersSection from '../components/ShopifyPartnersSection.jsx';
 import Loader from '../components/Loader.jsx';
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -64,6 +65,9 @@ export const Services = () => {
           ))}
         </div>
       )}
+
+      {/* Shopify Ecosystem & Partner Companies */}
+      <ShopifyPartnersSection />
 
       {/* Process summary banner */}
       <div className="p-8 sm:p-10 rounded-2xl bg-white dark:bg-[#0F172A] border border-slate-200 dark:border-slate-800 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl shadow-slate-900/5 dark:shadow-none">

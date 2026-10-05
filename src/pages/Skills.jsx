@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Code, Server, ShoppingCart, TrendingUp, Paintbrush } from 'lucide-react';
+import ShopifyPartnersSection from '../components/ShopifyPartnersSection.jsx';
 
 export const Skills = () => {
   useEffect(() => {
@@ -23,9 +24,20 @@ export const Skills = () => {
     },
     {
       category: 'CMS / E-Commerce',
-      description: 'Storefront development, custom liquid themes, and scalable content management.',
+      description: 'Storefront development, custom liquid themes, D2C checkouts, and scalable content management.',
       icon: ShoppingCart,
-      skills: ['Shopify', 'WordPress', 'WooCommerce'],
+      skills: [
+        'Shopify',
+        'WordPress',
+        'WooCommerce',
+        'GoKwik Checkout & KwikEngage',
+        'Shiprocket Faster Checkout',
+        'Shiprocket Orders Dashboard',
+        'YourToken',
+        'Verifast AI',
+        'Togethr',
+        'Snapmint',
+      ],
     },
     {
       category: 'SEO',
@@ -134,6 +146,9 @@ export const Skills = () => {
           );
         })}
       </div>
+
+      {/* Shopify Store Services & Partner Companies */}
+      <ShopifyPartnersSection />
     </div>
   );
 };

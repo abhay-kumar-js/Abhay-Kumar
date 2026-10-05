@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import ResumeModal from '../components/ResumeModal.jsx';
+import ShopifyPartnersSection from '../components/ShopifyPartnersSection.jsx';
 
 export const Experience = () => {
   const [isResumeOpen, setIsResumeOpen] = useState(false);
@@ -188,6 +189,9 @@ export const Experience = () => {
           ))}
         </div>
       </div>
+
+      {/* SHOPIFY STORE SERVICES & PARTNER INTEGRATIONS */}
+      <ShopifyPartnersSection />
 
       {/* EDUCATION SECTION */}
       <div className="space-y-6">
